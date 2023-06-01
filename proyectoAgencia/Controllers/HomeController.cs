@@ -14,6 +14,7 @@ namespace proyectoAgencia.Controllers
             _usuariosModel = usuariosModel;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             var nombreUsuario = _usuariosModel.ValidarCredenciales("sbansbach60414@ufide.ac.cr", "123");
@@ -29,5 +30,12 @@ namespace proyectoAgencia.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [HttpGet]
+        public IActionResult Registro()
+        {
+            return View();
+        }
+
     }
 }
