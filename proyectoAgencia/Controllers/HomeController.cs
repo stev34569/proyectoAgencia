@@ -17,18 +17,14 @@ namespace proyectoAgencia.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var nombreUsuario = _usuariosModel.ValidarCredenciales("sbansbach60414@ufide.ac.cr", "123");
-
-            HttpContext.Session.SetString("nombreUsuario", nombreUsuario);
-            HttpContext.Session.GetString("nombreUsuario");
-
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        [HttpPost]
+        public IActionResult IniciarSesion()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            /*PROGRA*/
+            return RedirectToAction("PantallaPrincipal", "Home");
         }
 
         [HttpGet]
@@ -37,5 +33,25 @@ namespace proyectoAgencia.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult RegistrarUsuario()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult PantallaPrincipal()
+        {
+            return View();
+        }
+
+
+
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }
