@@ -1,7 +1,12 @@
-﻿namespace proyectoAgencia.Interfaces
+﻿using proyectoAgencia.Entities;
+
+namespace proyectoAgencia.Interfaces
 {
     public interface IUsuariosModel
     {
-        public string ValidarCredenciales(string correo, string contrasenna);
+
+        public UsuarioEntRespuesta? IniciarSesion(UsuarioEnt entidad);
+        public UsuarioEntRespuesta? RegistrarUsuario(UsuarioEnt entidad);
+        public UsuarioEntRespuesta? RecuperarContrasenna(UsuarioEnt entidad);
     }
 }

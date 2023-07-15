@@ -1,0 +1,44 @@
+﻿@model proyectoAgencia.Entities.UsuarioEnt
+@{
+    ViewData["Title"] = "Cambiar";
+    //Descomentar esto
+   Layout = "~/Views/Shared/_Layout - Inicio.cshtml";
+}
+
+     <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+              <div class="d-flex justify-content-center py-4">
+                <a href="index.html" class="logo d-flex align-items-center w-auto">
+                    <img src="~/assets/images/logo.png" alt="">
+                 
+                </a>
+              </div><!-- End Logo -->
+
+              <div class="card mb-3">
+
+                <div class="card-body">
+
+
+                    @using (Html.BeginForm("RegistrarUsuario", "Home", FormMethod.Post, new { @class = "text-start" }))
+                    {
+                        <div class="input-group input-group-outline mb-3">
+                            @Html.TextBoxFor(x => x.ContrasennaTemporal, new { @class="form-control", @type="password", @placeholder="Contraseña Temporal" })
+                        </div>
+                        <div class="input-group input-group-outline mb-3">
+                            @Html.TextBoxFor(x => x.Contrasenna, new { @class="form-control", @type="password", @placeholder="Contraseña" })
+                        </div>
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Confirmar</button>
+                        </div>
+
+                    }
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
