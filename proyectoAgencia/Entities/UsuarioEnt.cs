@@ -21,5 +21,6 @@
         public bool Estado { get; set; }
         public bool ContrasennaTemp { get; set; }
         public DateTime ContrasennaVenc { get; set; }
+        public string Token { get; set; } = string.Empty;
     }
 }

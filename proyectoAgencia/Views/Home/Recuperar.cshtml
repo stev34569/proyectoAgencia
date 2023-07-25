@@ -14,17 +14,25 @@
                     <img src="~/assets/images/logo.png" alt="">
                  
                 </a>
-              </div><!-- End Logo -->
+              </div><!-- Fin del logo -->
 
               <div class="card mb-3">
 
                 <div class="card-body">
+
 
                     @using (Html.BeginForm("RecuperarContrasenna", "Home", FormMethod.Post, new { @class = "text-start" }))
                     {
                         <div class="input-group input-group-outline my-3">
                             @Html.TextBoxFor(x => x.CorreoElectronico, new { @class="form-control", @placeholder="Correo Electrónico" })
                         </div>
+
+                        @if (ViewBag.Mensaje != null)
+                        {
+                            <div style="text-align:center" class="alert alert-light" role="alert">
+                                @ViewBag.Mensaje
+                            </div>
+                        }
 
                         <div class="text-center">
                             <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Recuperar Contraseña</button>

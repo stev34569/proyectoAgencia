@@ -21,27 +21,33 @@
 
                 <div class="card-body">
 
-                @using (Html.BeginForm("IniciarSesion", "Home", FormMethod.Post, new { @class = "text-start" }))
-                {
-                    <br> <br>
-                    <div class="input-group input-group-outline mb-3">
-                        @Html.TextBoxFor(x => x.CorreoElectronico, new { @class="form-control", @placeholder="Correo Electrónico" })
-                    </div>
-                    <div class="col-12">
-                        @Html.TextBoxFor(x => x.Contrasenna, new { @class="form-control", @type="password", @placeholder="Contraseña" })
-                    </div>
-                      
+                    @using (Html.BeginForm("IniciarSesion", "Home", FormMethod.Post, new { @class = "text-start" }))
+                    {
+                        <div class="input-group input-group-outline my-3">
+                            @Html.TextBoxFor(x => x.CorreoElectronico, new { @class="form-control", @placeholder="Correo Electrónico" })
+                        </div>
                         <div class="input-group input-group-outline mb-3">
-                        <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Iniciar Sesión</button>
-                    </div>
-                    <p class="col-12">
-                        ¿Olvidaste la contraseña?
-                        <a href="@Url.Action("Recuperar","Home")" class="text-primary text-gradient font-weight-bold">Recuperar Contraseña</a>
-                        <br />
-                        ¿No tienes una cuenta?
-                        <a href="@Url.Action("Registro","Home")" class="text-primary text-gradient font-weight-bold">Ir al Registro</a>
-                    </p>
-                }
+                            @Html.TextBoxFor(x => x.Contrasenna, new { @class="form-control", @type="password", @placeholder="Contraseña", /*@onpaste="return false;", @ondrop="return false;"*/ })
+                        </div>
+
+                        @if (ViewBag.Mensaje != null)
+                        {
+                            <div style="text-align:center" class="alert alert-light" role="alert">
+                                @ViewBag.Mensaje
+                            </div>
+                        }
+
+                        <div class="text-center">
+                            <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Iniciar Sesión</button>
+                        </div>
+                        <p class="mt-4 text-sm text-center">
+                            ¿Olvidaste la contraseña?
+                            <a href="@Url.Action("Recuperar","Home")" class="text-primary text-gradient font-weight-bold">Recuperar Contraseña</a>
+                            <br />
+                            ¿No tienes una cuenta?
+                            <a href="@Url.Action("Registro","Home")" class="text-primary text-gradient font-weight-bold">Ir al Registro</a>
+                        </p>
+                    }
                 </>
               </div>
 

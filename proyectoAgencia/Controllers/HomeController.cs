@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 namespace proyectoAgencia.Controllers
 {
+
     public class HomeController : Controller
     {
         private readonly IUsuariosModel _usuariosModel;
@@ -26,19 +27,31 @@ namespace proyectoAgencia.Controllers
         [HttpPost]
         public IActionResult IniciarSesion(UsuarioEnt entidad)
         {
-            var datos = _usuariosModel.IniciarSesion(entidad);
-            if (datos?.Codigo != 1)
+            try
             {
-                ViewBag.Mensaje = datos?.Mensaje;
+                entidad.Contrasenna = _usuariosModel.Encrypt(entidad.Contrasenna);
+                var datos = _usuariosModel.IniciarSesion(entidad);
+                if (datos?.Codigo != 1)
+                {
+                    ViewBag.Mensaje = datos?.Mensaje;
+                    return View("Index");
+                }
+
+                HttpContext.Session.SetString("TokenUsuario", datos.Objeto.Token.ToString());
+
+                if (datos?.Objeto.ContrasennaTemp == true)
+                {
+                    return RedirectToAction("Cambiar", "Home");
+                }
+
+                return RedirectToAction("PantallaPrincipal", "Home");
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Mensaje = "Consulte con un agente de viajes";
                 return View("Index");
             }
-
-            if (datos?.Objeto.ContrasennaTemp == true)
-            {
-                return RedirectToAction("Cambiar", "Home");
-            }
-
-            return RedirectToAction("PantallaPrincipal", "Home");
         }
 
 
@@ -51,6 +64,7 @@ namespace proyectoAgencia.Controllers
         [HttpPost]
         public IActionResult RegistrarUsuario(UsuarioEnt entidad)
         {
+            entidad.Contrasenna = _usuariosModel.Encrypt(entidad.Contrasenna);
             var datos = _usuariosModel.RegistrarUsuario(entidad);
             if (datos?.Codigo != 1)
             {
@@ -91,13 +105,23 @@ namespace proyectoAgencia.Controllers
         [HttpPost]
         public IActionResult CambiarContrasenna(UsuarioEnt entidad)
         {
-            //FALTA PROGRAMAR
+            entidad.Contrasenna = _usuariosModel.Encrypt(entidad.Contrasenna);
 
             if (entidad.Contrasenna == entidad.ContrasennaTemporal)
             {
-                ViewBag.Mensaje = "La contraseña";
+                //Mensajes relevantes 
+                ViewBag.Mensaje = "Las contraseñas deben ser difrentes ";
                 return View("Cambiar");
             }
+
+            var datos = _usuariosModel.CambiarContrasenna(entidad);
+            if (datos?.Codigo != 1)
+            {
+                ViewBag.Mensaje = datos?.Mensaje;
+                return View("Cambiar");
+            }
+
+            //Lo mande a la pantalla principal cuando cambiar la contraseña
             return RedirectToAction("PantallaPrincipal", "Home");
         }
 
