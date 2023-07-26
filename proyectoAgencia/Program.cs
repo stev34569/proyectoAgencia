@@ -9,6 +9,7 @@ builder.Services.AddSession();
 builder.Services.AddHttpClient();
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddScoped<IAgenciaViajesModel, AgenciaViajesModel>();
 builder.Services.AddScoped<IUsuariosModel, UsuariosModel>();
 
 var app = builder.Build();

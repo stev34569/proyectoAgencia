@@ -1,0 +1,48 @@
+﻿@model proyectoAgencia.Entities.AgenciaViajesEnt
+
+@{
+    ViewData["Title"] = "Cambiar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Editar", "AgenciaViajes", FormMethod.Post, new { @class = "text-start" }))
+{
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="card card-plain col-lg-8">
+
+            <div class="card-body">
+
+                @Html.Label("NombreAgencia")
+                <div class="input-group input-group-outline mb-3">
+                    @Html.TextBoxFor(x => x.NombreAgencia, new { @class="form-control", @disabled="true", @type="text",
+                @placeholder="Identificación", @style="background-color:lightgray" })
+                </div>
+
+                @Html.Label("Direccion")
+                <div class="input-group input-group-outline mb-3">
+                    @Html.TextBoxFor(x => x.Direccion, new { @class="form-control", @disabled="true", @type="text",
+                @placeholder="Nombre", @style="background-color:lightgray" })
+                </div>
+
+                @Html.Label("Ciudad Electrónico")
+                <div class="input-group input-group-outline mb-3">
+                    @Html.TextBoxFor(x => x.Ciudad, new { @class="form-control", @placeholder="Ciudad" })
+                </div>
+
+              
+
+                @if (ViewBag.Mensaje != null)
+                {
+                    <div style="text-align:center" class="alert alert-light" role="alert">
+                        @ViewBag.Mensaje
+                    </div>
+                }
+
+                <div style="text-align:right">
+                    <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" style="width:25%!important">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
