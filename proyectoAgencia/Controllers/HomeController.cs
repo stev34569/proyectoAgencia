@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using proyectoAgencia.Entities;
 using proyectoAgencia.Interfaces;
 using proyectoAgencia.Models;
@@ -11,10 +10,12 @@ namespace proyectoAgencia.Controllers
     public class HomeController : Controller
     {
         private readonly IUsuariosModel _usuariosModel;
+        private readonly IPaquetesModel _paquetesModel;
 
-        public HomeController(IUsuariosModel usuariosModel)
+        public HomeController(IUsuariosModel usuariosModel, IPaquetesModel paquetesModel)
         {
             _usuariosModel = usuariosModel;
+            _paquetesModel = paquetesModel;
         }
 
 
@@ -38,6 +39,7 @@ namespace proyectoAgencia.Controllers
                 }
 
                 HttpContext.Session.SetString("TokenUsuario", datos.Objeto.Token.ToString());
+                HttpContext.Session.SetString("NombreUsuario", datos.Objeto.Nombre.ToString());
 
                 if (datos?.Objeto.ContrasennaTemp == true)
                 {
@@ -127,16 +129,54 @@ namespace proyectoAgencia.Controllers
 
 
         [HttpGet]
-        public IActionResult PantallaPrincipal()
+        public IActionResult CambiarContrasennaUsuario()
         {
+            HttpContext.Session.SetString("NombrePantalla", "Cambiar Contraseña");
             return View();
         }
 
+        [HttpPost]
+        public IActionResult CambiarContrasennaUsuario(UsuarioEnt entidad)
+        {
+            entidad.Contrasenna = _usuariosModel.Encrypt(entidad.Contrasenna);
+            entidad.ConfirmarContrasenna = _usuariosModel.Encrypt(entidad.ConfirmarContrasenna);
+
+            if (entidad.Contrasenna != entidad.ConfirmarContrasenna)
+            {
+                ViewBag.Mensaje = "Las contraseñas no coinciden";
+                return View("CambiarContrasennaUsuario");
+            }
+
+            var datos = _usuariosModel.CambiarContrasenna(entidad);
+            if (datos?.Codigo != 1)
+            {
+                ViewBag.Mensaje = datos?.Mensaje;
+                return View("CambiarContrasennaUsuario");
+            }
+
+            return RedirectToAction("PantallaPrincipal", "Home");
+        }
+        [HttpGet]
+        public IActionResult PantallaPrincipal()
+        {
+            HttpContext.Session.SetString("NombrePantalla", "Paquetes Disponibles");
+            var datos = _paquetesModel.ConsultarPaquetes();
+            return View(datos?.Objetos);
+        }
+
+
+        [HttpGet]
+        public IActionResult CerrarSesion()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
     }
 }

@@ -1,0 +1,53 @@
+﻿@model proyectoAgencia.Entities.UsuarioEnt
+
+@{
+    ViewData["Title"] = "Cambiar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<span class="mask bg-gradient-dark opacity-6"></span>
+<div class="container my-auto">
+    <div class="row">
+
+
+        <div class="card-body">
+
+            @using (Html.BeginForm("CambiarContrasennaUsuario", "Home", FormMethod.Post, new { @class = "text-start" }))
+            {
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="card card-plain col-lg-8">
+
+                        <div class="card-body">
+                            <div class="input-group input-group-outline mb-3">
+                                @Html.TextBoxFor(x => x.Contrasenna, new { @class="form-control", @type="password", @placeholder="Contraseña" })
+                            </div>
+
+                            <div class="input-group input-group-outline mb-3">
+                                @Html.TextBoxFor(x => x.Contrasenna, new { @class="form-control", @type="password", @placeholder="Confirmación" })
+                            </div>
+
+                            @if (ViewBag.Mensaje != null)
+                            {
+                                <div style="text-align:center" class="alert alert-light" role="alert">
+                                    @ViewBag.Mensaje
+                                </div>
+                            }
+
+                            <div style="text-align:right">
+                                <button type="submit" class="btn btn-success">Confirmar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            
+        </div>
+    </div>
+</div>
+
+
+                  
+
+

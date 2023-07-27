@@ -8,6 +8,8 @@ namespace proyectoAgencia.Models
 {
     public class UsuariosModel : IUsuariosModel
     {
+
+        //Inyeccion dependencias
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _HttpContextAccessor;
