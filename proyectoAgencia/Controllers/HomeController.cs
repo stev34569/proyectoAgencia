@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using proyectoAgencia.Entities;
 using proyectoAgencia.Interfaces;
 using proyectoAgencia.Models;
 using System.Diagnostics;
+using System.Net;
 
 namespace proyectoAgencia.Controllers
 {
@@ -12,12 +14,17 @@ namespace proyectoAgencia.Controllers
         private readonly IUsuariosModel _usuariosModel;
         private readonly IPaquetesModel _paquetesModel;
         private readonly ICarritoModel _carritoModel;
+        private readonly IConfiguration _configuration;
 
-        public HomeController(IUsuariosModel usuariosModel, IPaquetesModel paquetesModel, ICarritoModel carritoModel)
+
+
+        public HomeController(IUsuariosModel usuariosModel, IPaquetesModel paquetesModel, ICarritoModel carritoModel, IConfiguration configuration)
         {
             _usuariosModel = usuariosModel;
             _paquetesModel = paquetesModel;
             _carritoModel = carritoModel;
+            _configuration = configuration;
+
         }
 
 
@@ -68,9 +75,49 @@ namespace proyectoAgencia.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult RegistrarUsuario(UsuarioEnt entidad)
+
+        public bool ValidarCaptcha(string captchaResponse)
         {
+            var result = false;
+            //secretkey que te dan igual en la pag de captcha
+            var secretKey = _configuration["AppSettings:SecretKey"];
+            //0 y 1 son marcadores de posicion, posteriormente son las que van a ser remplazados con el secretkey y el response
+            var apiUrl = "https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}";
+            var requestUri = string.Format(apiUrl, secretKey, captchaResponse);
+            //se crea la solicitud para ser enviada
+            var request = (HttpWebRequest)WebRequest.Create(requestUri);
+            using (WebResponse response = request.GetResponse())
+            {
+                using (StreamReader stream = new StreamReader(response.GetResponseStream()))
+                {
+                    JObject jResponse = JObject.Parse(stream.ReadToEnd());
+                    var isSuccess = jResponse.Value<bool>("success");
+                    result = isSuccess;
+                }
+            }
+            return result;
+
+        }
+
+
+
+        [HttpPost]
+        public IActionResult RegistrarUsuario(UsuarioEnt entidad, string recaptchaValue)
+        {
+            // Verificar el reCAPTCHA
+            if (string.IsNullOrEmpty(recaptchaValue))
+            {
+                ViewBag.Mensaje = "Por favor, complete el reCAPTCHA.";
+                return View("Registro");
+            }
+
+            if (!ValidarCaptcha(recaptchaValue))
+            {
+                ViewBag.Mensaje = "Captcha no válido.";
+                return View("Registro");
+            }
+
+            // El reCAPTCHA es válido, continuar con el registro del usuario
             entidad.Contrasenna = _usuariosModel.Encrypt(entidad.Contrasenna);
             var datos = _usuariosModel.RegistrarUsuario(entidad);
             if (datos?.Codigo != 1)

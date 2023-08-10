@@ -1,65 +1,101 @@
 ﻿@model proyectoAgencia.Entities.UsuarioEnt
 @{
     ViewData["Title"] = "Registro";
+    //Descomentar esto
     Layout = "~/Views/Shared/_Layout - Inicio.cshtml";
+
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<body>
 
-    <div class="container">
-        <h2>Stacked form</h2>
-        @using (Html.BeginForm("RegistrarUsuario", "Home", FormMethod.Post, new { @class = "text-start" }))
-        {
-            <div class="input-group input-group-outline mb-3">
-                @Html.TextBoxFor(x => x.Identificacion, new { @class="form-control", @type="text", @placeholder="Identificación" })
-            </div>
-            <div class="input-group input-group-outline mb-3">
-                @Html.TextBoxFor(x => x.Nombre, new { @class="form-control", @type="text", @placeholder="Nombre" })
-            </div>
-            <div class="input-group input-group-outline mb-3">
-                @Html.TextBoxFor(x => x.CorreoElectronico, new { @class="form-control", @placeholder="Correo Electrónico" })
-            </div>
-            <div class="input-group input-group-outline mb-3">
-                @Html.TextBoxFor(x => x.Contrasenna, new { @class="form-control", @type="password", @placeholder="Contraseña" })
-            </div>
-            <div class="form-check form-check-info text-start ps-0">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
-                <label class="form-check-label text-dark font-weight-bolder" for="flexCheckDefault">
-                    Acepto los términos y condiciones.
-                </label>
-            </div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-            @if (ViewBag.Mensaje != null)
-            {
-                <div style="text-align:center" class="alert alert-light" role="alert">
-                    @ViewBag.Mensaje
+            <div class="d-flex justify-content-center py-4">
+                <a href="index.html" class="logo d-flex align-items-center w-auto">
+                    <img src="~/assets/images/logo.png" alt="">
+
+                </a>
+            </div><!-- End Logo -->
+            <h2>Registro de usuarios</h2>
+            <div class="card mb-3">
+
+                <div class="card-body">
+                   
+                    @using (Html.BeginForm("RegistrarUsuario", "Home", FormMethod.Post, new { @class = "text-start" }))
+                    {
+                        <div class="input-group input-group-outline mb-3">
+                            @Html.TextBoxFor(x => x.Identificacion, new { @class="form-control", @type="text", @placeholder="Identificación" })
+                        </div>
+                        <div class="input-group input-group-outline mb-3">
+                            @Html.TextBoxFor(x => x.Nombre, new { @class="form-control", @type="text", @placeholder="Nombre" })
+                        </div>
+                        <div class="input-group input-group-outline mb-3">
+                            @Html.TextBoxFor(x => x.CorreoElectronico, new { @class="form-control", @placeholder="Correo Electrónico" })
+                        </div>
+                        <div class="input-group input-group-outline mb-3">
+                            @Html.TextBoxFor(x => x.Contrasenna, new { @class="form-control", @type="password", @placeholder="Contraseña" })
+                        </div>
+                        <div class="col-sm-3">
+                            <!-- La llave del sitio que dan en la página de captcha de Google -->
+                            <div class="g-recaptcha" data-sitekey="6Le9rVonAAAAAN1DmUX2HwlVc6hHOZGxNT-4sAy6"></div>
+                        </div>
+                          <!-- Para poder hacer la validación de que si el captcha ya fue realizado, obtener los datos -->
+                        <input type="hidden" id="recaptchaValue" name="recaptchaValue" />
+
+                        @if (ViewBag.Mensaje != null)
+                        {
+                            <div style="text-align:center" class="alert alert-light" role="alert">
+                                @ViewBag.Mensaje
+                            </div>
+                        }
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" onclick="onSubmit()">Registrarse</button>
+                        </div>
+                        <p class="mt-4 text-sm text-center">
+                            ¿tienes una cuenta?
+                            <a href="@Url.Action("Index","Home")" class="text-primary text-gradient font-weight-bold">Ir al Inicio</a>
+                        </p>
+                    }
+                    </>
                 </div>
-            }
 
-            <div class="text-center">
-                <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Registrarse</button>
             </div>
-            <p class="mt-4 text-sm text-center">
-                ¿tienes una cuenta?
-                <a href="@Url.Action("Index","Home")" class="text-primary text-gradient font-weight-bold">Ir al Inicio</a>
-            </p>
-        }
+        </div>
     </div>
 
-</body>
-</html>
+    <!-- Para obtener nombre completo del api -->
+    <script>
+        function obtenerNombre() {
+            var identificacion = document.getElementById('Identificacion').value;
+            if (identificacion.trim() === "") {
+                return;
+            }
 
+            // Consultar la API del receptor para obtener el nombre
+            fetch(`https://apis.gometa.org/cedulas/${identificacion}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.nombre) {
+                        document.getElementById('Nombre').value = data.nombre;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error al obtener el nombre:', error);
+                });
+        }
+    </script>
 
+    <!-- Esto se trato de poner en el layout , pero por alguna razon no funcionaba bien -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
+    <!-- captura y envia el valor del captcha para poder validar -->
+    <script>
+        function onSubmit() {
+            var response = grecaptcha.getResponse();
+            document.getElementById('recaptchaValue').value = response;
+            document.forms[0].submit();
+        }
+    </script>
 
