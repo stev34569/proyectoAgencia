@@ -12,6 +12,8 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IPaquetesModel, PaquetesModel>();
 builder.Services.AddScoped<IAgenciaViajesModel, AgenciaViajesModel>();
 builder.Services.AddScoped<IUsuariosModel, UsuariosModel>();
+builder.Services.AddScoped<ICarritoModel, CarritoModel>();
+ 
 
 var app = builder.Build();
 

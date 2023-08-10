@@ -4,12 +4,15 @@
     ViewData["Title"] = "Cambiar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<span class="mask bg-gradient-dark opacity-6"></span>
-<div class="container my-auto">
+<section class="probootstrap_section bg-light">
+    <div class="container">
+        <div class="row text-center mb-5 probootstrap-animate">
+            <div class="col-md-12">
+                <h2 class="display-4 border-bottom probootstrap-section-heading">More Services</h2>
+            </div>
+        </div>
+    </div>
     <div class="row">
-
-
         <div class="card-body">
 
             @using (Html.BeginForm("CambiarContrasennaUsuario", "Home", FormMethod.Post, new { @class = "text-start" }))
@@ -19,10 +22,12 @@
                     <div class="card card-plain col-lg-8">
 
                         <div class="card-body">
+                            <label for="usr">Contraseña:</label>
                             <div class="input-group input-group-outline mb-3">
+
                                 @Html.TextBoxFor(x => x.Contrasenna, new { @class="form-control", @type="password", @placeholder="Contraseña" })
                             </div>
-
+                            <label for="usr">Confirmación:</label>
                             <div class="input-group input-group-outline mb-3">
                                 @Html.TextBoxFor(x => x.Contrasenna, new { @class="form-control", @type="password", @placeholder="Confirmación" })
                             </div>
@@ -35,17 +40,20 @@
                             }
 
                             <div style="text-align:right">
-                                <button type="submit" class="btn btn-success">Confirmar</button>
+                                <button type="submit" class="btn btn-primary">Confirmar</button>
                             </div>
                         </div>
                     </div>
                 </div>
             }
 
-            
+
         </div>
     </div>
-</div>
+    
+    
+</section>
+
 
 
                   

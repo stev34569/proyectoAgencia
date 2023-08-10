@@ -7,25 +7,196 @@
 
 
 
-@foreach (var item in Model)
-{
-    <div class="col-lg-3">
-        <div class="card">
-
-            <img src="@item.Imagen" class="card-img-top" alt="..." />
-
-            <div class="card-body">
-                <h5 class="card-title">@item.Nombre</h5>
-                <p class="card-text">
-                    Agente: @item.Agente
-                    <br /> Inicio: @item.FechaInicio.ToShortDateString()
-                    <br /> Precio: 	₡ @item.Precio
-                </p>
+<section class="probootstrap_section bg-light">
+    <div class="container">
+        <div class="row text-center mb-5 probootstrap-animate">
+            <div class="col-md-12">
+                <h2 class="display-4 border-bottom probootstrap-section-heading">More Services</h2>
             </div>
-
         </div>
-        <br /><br />
     </div>
-}
+    <div class="row">
 
 
+        @if (Model.Count() > 0)
+        {
+
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3">
+                    <div class="card">
+
+                        <img src="@item.Imagen" class="card-img-top" alt="..." />
+
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Nombre</h5>
+                            <p class="card-text">
+                                Agente: @item.Agente
+                                <br /> Inicio: @item.FechaInicio.ToShortDateString() - @item.Finalizacion.ToShortDateString()
+                                <br /> Precio: 	₡ @item.Precio
+                                <br /> Espacios: @item.Campo
+                                <br /> Descripcion: @item.Descripcion
+                            </p>
+                        </div>
+                        <div class="row">
+                           
+                            <div class="col-5">
+                               <a href="@Url.Action("AgregarPaqueteCarrito", "Carrito", new { q = item.IdPaquete })" class="btn btn-outline-warning"><i class="fa fa-plus"></i>  Añadir</a>
+                            </div>
+                            <div class="col-6">
+                                <a href="" class="btn btn-primary"> <i class="fa-regular fa-circle-play"></i> Detalle</a>
+                              
+                            </div>
+                            <div class="col-5"></div>
+                        </div>
+
+                    </div>
+                    </div>
+                    <br /><br />
+              
+            }
+        }
+        else
+        {
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <div class="card">
+
+                    <div class="card-body">
+                        <h5 class="card-title" style="text-align:center">No hay Paquetes de viajes disponibles en este momento</h5>
+                    </div>
+
+                </div>
+                <br /><br />
+            </div>
+        }
+
+    </div>
+
+</section>
+<section class="probootstrap_section">
+    <div class="container">
+        <div class="row text-center mb-5 probootstrap-animate">
+            <div class="col-md-12">
+                <h2 class="display-4 border-bottom probootstrap-section-heading">Travel With Us</h2>
+            </div>
+        </div>
+    </div>
+        <div class="row probootstrap-animate">
+            <div class="col-md-12">
+                <div class="owl-carousel js-owl-carousel-2">
+                    <div>
+                        <div class="media probootstrap-media d-block align-items-stretch mb-4 probootstrap-animate">
+                            <img src="/assets/images/sq_img_2.jpg" alt="Free Template by ProBootstrap" class="img-fluid">
+                            <div class="media-body">
+                                <h5 class="mb-3">02. Service Title Here</h5>
+                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END slide item -->
+
+                    <div>
+                        <div class="media probootstrap-media d-block align-items-stretch mb-4 probootstrap-animate">
+                            <img src="/assets/images/sq_img_1.jpg" alt="Free Template by ProBootstrap" class="img-fluid">
+                            <div class="media-body">
+                                <h5 class="mb-3">02. Service Title Here</h5>
+                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END slide item -->
+
+                    <div>
+                        <div class="media probootstrap-media d-block align-items-stretch mb-4 probootstrap-animate">
+                            <img src="/assets/images/sq_img_3.jpg" alt="Free Template by ProBootstrap" class="img-fluid">
+                            <div class="media-body">
+                                <h5 class="mb-3">02. Service Title Here</h5>
+                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END slide item -->
+
+                    <div>
+                        <div class="media probootstrap-media d-block align-items-stretch mb-4 probootstrap-animate">
+                            <img src="/assets/images/sq_img_4.jpg" alt="Free Template by ProBootstrap" class="img-fluid">
+                            <div class="media-body">
+                                <h5 class="mb-3">02. Service Title Here</h5>
+                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END slide item -->
+
+                    <div>
+                        <div class="media probootstrap-media d-block align-items-stretch mb-4 probootstrap-animate">
+                            <img src="/assets/images/sq_img_5.jpg" alt="Free Template by ProBootstrap" class="img-fluid">
+                            <div class="media-body">
+                                <h5 class="mb-3">02. Service Title Here</h5>
+                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END slide item -->
+
+
+                    <div>
+                        <div class="media probootstrap-media d-block align-items-stretch mb-4 probootstrap-animate">
+                            <img src="/assets/images/sq_img_2.jpg" alt="Free Template by ProBootstrap" class="img-fluid">
+                            <div class="media-body">
+                                <h5 class="mb-3">02. Service Title Here</h5>
+                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END slide item -->
+
+                    <div>
+                        <div class="media probootstrap-media d-block align-items-stretch mb-4 probootstrap-animate">
+                            <img src="/assets/images/sq_img_1.jpg" alt="Free Template by ProBootstrap" class="img-fluid">
+                            <div class="media-body">
+                                <h5 class="mb-3">02. Service Title Here</h5>
+                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END slide item -->
+
+                    <div>
+                        <div class="media probootstrap-media d-block align-items-stretch mb-4 probootstrap-animate">
+                            <img src="/assets/images/sq_img_3.jpg" alt="Free Template by ProBootstrap" class="img-fluid">
+                            <div class="media-body">
+                                <h5 class="mb-3">02. Service Title Here</h5>
+                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END slide item -->
+
+                    <div>
+                        <div class="media probootstrap-media d-block align-items-stretch mb-4 probootstrap-animate">
+                            <img src="/assets/images/sq_img_4.jpg" alt="Free Template by ProBootstrap" class="img-fluid">
+                            <div class="media-body">
+                                <h5 class="mb-3">02. Service Title Here</h5>
+                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END slide item -->
+
+                    <div>
+                        <div class="media probootstrap-media d-block align-items-stretch mb-4 probootstrap-animate">
+                            <img src="/assets/images/sq_img_5.jpg" alt="Free Template by ProBootstrap" class="img-fluid">
+                            <div class="media-body">
+                                <h5 class="mb-3">02. Service Title Here</h5>
+                                <p>
+                            </div>
+                        </div>
+                        <!-- END slide item -->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>

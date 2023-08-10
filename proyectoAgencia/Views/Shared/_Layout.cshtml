@@ -36,7 +36,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar">
         <div class="container">
 
-            <h6 class="badge bg-primary text-wrap" style="width :100px 6rem">@Context.Session.GetString("NombreUsuario")</h6>
+            <h5 class="badge bg-primary text-wrap" style="width :100px 6rem">@Context.Session.GetString("NombreUsuario") / @Context.Session.GetString("NombreRolUsuario")</h5>
 
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu" aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,16 +45,23 @@
             <div class="collapse navbar-collapse" id="probootstrap-menu">
                 <ul class="navbar-nav ml-auto">
 
-                   
+                   @if (Context.Session.GetString("RolUsuario").ToString() == "1")
+                    {
+                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("ConsultarUsuarios","Usuario")">Usuarios</a></li>
+                    }
 
-                
                     <li class="nav-item active"><a class="nav-link" href="@Url.Action("Registro","AgenciaViajes")">Agencia de viajes</a></li>
                     <li class="nav-item active"><a class="nav-link" href="@Url.Action("ConsultarPaquetes2", "paquete2")">Destinos</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contactenos</a></li>
-                    <li class="nav-item active"><a class="nav-link" href="@Url.Action("ConsultarPaquetesUsuario", "paquete")">Paquetes de viajes</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="@Url.Action("ConsultarPaquetesUsuario", "paquete")">Calendario de viajes</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="@Url.Action("ConsultarPaquetesUsuario", "paquete")"> Pago de reservaciones </a></li>
+                    <i class="fa fa-cart-plus fa-lg faa-tada animated-hover fixed-plugin-button-nav cursor-pointer"></i>&nbsp;&nbsp;&nbsp;
+                    @Context.Session.GetString("Cantidad").ToString()&nbsp;&nbsp;&nbsp;
+                    <i class="fa fa-money fa-lg faa-tada animated-hover fixed-plugin-button-nav cursor-pointer"></i>&nbsp;&nbsp;&nbsp;
+                    @Context.Session.GetString("SubTotal").ToString()&nbsp;&nbsp;&nbsp;
                     <li class="nav-item px-3 d-flex align-items-center">
 
-
+                        
 
                         <a href="@Url.Action("CambiarContrasennaUsuario", "Home")" class="nav-link p-0 text-body">
                             <i class="fa-solid fa-user-lock fa-beat-fade fa-xl" style="color: #dbd40a;" title="Cambiar Contraseña" aria-hidden="true"></i>

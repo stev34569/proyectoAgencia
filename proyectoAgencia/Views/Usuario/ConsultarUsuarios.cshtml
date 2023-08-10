@@ -1,0 +1,82 @@
+﻿@model IEnumerable<proyectoAgencia.Entities.UsuarioEnt>
+
+@{
+    ViewData["Title"] = "ConsultarUsuarios";
+}
+<section class="probootstrap_section bg-light">
+    <div class="container">
+        <div class="row text-center mb-5 probootstrap-animate">
+            <div class="col-md-12">
+                <h2 class="display-4 border-bottom probootstrap-section-heading">More Services</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        @if (Model.Count() > 0)
+        {
+            <div class="col-1"></div>
+            <div class="col-10">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr class="table-primary">
+                            <th>Identificación</th>
+                            <th>Nombre</th>
+                            <th>Correo Electrónico</th>
+                            <th>Estado</th>
+                            <th>Rol</th>
+                            <th>Editar</th>
+                            <th>Cambiar Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Identificacion</td>
+                                <td>@item.Nombre</td>
+                                <td>@item.CorreoElectronico</td>
+                                @if (item.Estado == true)
+                                {
+                                    <td>Activar</td>
+                                }
+                                else
+                                {
+                                    <td>Inactivar</td>
+                                }
+                                <td>@item.NombreRol</td>
+                                <td>
+                                    <a href="@Url.Action("Editar","Usuario", new { q = item.IdUsuario })">
+                                        <i class="fa-solid fa-pen-to-square" style="color: #0756df;"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("CambiarEstado","Usuario", new { q = item.IdUsuario })">
+                                        <i class="fa-solid fa-user-xmark" style="color: #ff0000;"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <div class="card">
+
+                    <div class="card-body">
+                        <h5 class="card-title" style="text-align:center">No hay usuarios en este momento</h5>
+                    </div>
+
+                </div>
+                <br /><br />
+            </div>
+        }
+
+    </div>
+</section>

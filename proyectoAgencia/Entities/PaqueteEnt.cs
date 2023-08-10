@@ -17,6 +17,8 @@
         public string Descripcion { get; set; } = string.Empty;
         public string Agente { get; set; } = string.Empty;
         public DateTime FechaInicio { get; set; }
+        public DateTime Finalizacion { get; set; }
+        public int Campo { get; set; }
         public string Imagen { get; set; } = string.Empty;
     }
 }

@@ -11,11 +11,13 @@ namespace proyectoAgencia.Controllers
     {
         private readonly IUsuariosModel _usuariosModel;
         private readonly IPaquetesModel _paquetesModel;
+        private readonly ICarritoModel _carritoModel;
 
-        public HomeController(IUsuariosModel usuariosModel, IPaquetesModel paquetesModel)
+        public HomeController(IUsuariosModel usuariosModel, IPaquetesModel paquetesModel, ICarritoModel carritoModel)
         {
             _usuariosModel = usuariosModel;
             _paquetesModel = paquetesModel;
+            _carritoModel = carritoModel;
         }
 
 
@@ -40,6 +42,8 @@ namespace proyectoAgencia.Controllers
 
                 HttpContext.Session.SetString("TokenUsuario", datos.Objeto.Token.ToString());
                 HttpContext.Session.SetString("NombreUsuario", datos.Objeto.Nombre.ToString());
+                HttpContext.Session.SetString("RolUsuario", datos.Objeto.IdRol.ToString());
+                HttpContext.Session.SetString("NombreRolUsuario", datos.Objeto.NombreRol.ToString());
 
                 if (datos?.Objeto.ContrasennaTemp == true)
                 {
@@ -51,10 +55,11 @@ namespace proyectoAgencia.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Mensaje = "Consulte con un agente de viajes";
+                ViewBag.Mensaje = "Consulte con el administrador";
                 return View("Index");
             }
         }
+
 
 
         [HttpGet]
@@ -78,6 +83,7 @@ namespace proyectoAgencia.Controllers
         }
 
 
+
         [HttpGet]
         public IActionResult Recuperar()
         {
@@ -98,6 +104,7 @@ namespace proyectoAgencia.Controllers
         }
 
 
+
         [HttpGet]
         public IActionResult Cambiar()
         {
@@ -111,8 +118,7 @@ namespace proyectoAgencia.Controllers
 
             if (entidad.Contrasenna == entidad.ContrasennaTemporal)
             {
-                //Mensajes relevantes 
-                ViewBag.Mensaje = "Las contraseñas deben ser difrentes ";
+                ViewBag.Mensaje = "Las contraseñas no pueden ser iguales";
                 return View("Cambiar");
             }
 
@@ -123,9 +129,9 @@ namespace proyectoAgencia.Controllers
                 return View("Cambiar");
             }
 
-            //Lo mande a la pantalla principal cuando cambiar la contraseña
             return RedirectToAction("PantallaPrincipal", "Home");
         }
+
 
 
         [HttpGet]
@@ -156,13 +162,23 @@ namespace proyectoAgencia.Controllers
 
             return RedirectToAction("PantallaPrincipal", "Home");
         }
+
+
+
         [HttpGet]
         public IActionResult PantallaPrincipal()
         {
             HttpContext.Session.SetString("NombrePantalla", "Paquetes Disponibles");
             var datos = _paquetesModel.ConsultarPaquetes();
+
+            var datosCarrito = _carritoModel.ConsultarResumenCarrito();
+
+            HttpContext.Session.SetString("Cantidad", datosCarrito?.Objeto.Cantidad.ToString());
+            HttpContext.Session.SetString("SubTotal", datosCarrito?.Objeto.SubTotal.ToString());
+
             return View(datos?.Objetos);
         }
+
 
 
         [HttpGet]
@@ -172,11 +188,12 @@ namespace proyectoAgencia.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
     }
 }
