@@ -25,10 +25,11 @@
                     @using (Html.BeginForm("RegistrarUsuario", "Home", FormMethod.Post, new { @class = "text-start" }))
                     {
                         <div class="input-group input-group-outline mb-3">
-                            @Html.TextBoxFor(x => x.Identificacion, new { @class="form-control", @type="text", @placeholder="Identificación" })
+                            @Html.TextBoxFor(x => x.Identificacion, new { @class="form-control", @type="text", @placeholder="Identificación", @onchange = "obtenerNombre()"  })
                         </div>
                         <div class="input-group input-group-outline mb-3">
-                            @Html.TextBoxFor(x => x.Nombre, new { @class="form-control", @type="text", @placeholder="Nombre" })
+                            @Html.TextBoxFor(x => x.Nombre, new { @class="form-control", @type="text", @placeholder="Nombre",
+                        @readonly = "readonly" ,@style = "background-color: #f2f2f2; color: #333; pointer-events: none;"})
                         </div>
                         <div class="input-group input-group-outline mb-3">
                             @Html.TextBoxFor(x => x.CorreoElectronico, new { @class="form-control", @placeholder="Correo Electrónico" })
