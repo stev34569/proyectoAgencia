@@ -55,13 +55,13 @@
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contactenos</a></li>
                     <li class="nav-item active"><a class="nav-link" href="@Url.Action("ConsultarPaquetesUsuario", "paquete")">Calendario de viajes</a></li>
                     <li class="nav-item active"><a class="nav-link" href="@Url.Action("ConsultarPaquetesUsuario", "paquete")"> Pago de reservaciones </a></li>
-                    <i class="fa fa-cart-plus fa-lg faa-tada animated-hover fixed-plugin-button-nav cursor-pointer"></i>&nbsp;&nbsp;&nbsp;
-                    @Context.Session.GetString("Cantidad").ToString()&nbsp;&nbsp;&nbsp;
-                    <i class="fa fa-money fa-lg faa-tada animated-hover fixed-plugin-button-nav cursor-pointer"></i>&nbsp;&nbsp;&nbsp;
-                    @Context.Session.GetString("SubTotal").ToString()&nbsp;&nbsp;&nbsp;
+
                     <li class="nav-item px-3 d-flex align-items-center">
 
-                        
+                        <i class="fa fa-cart-plus fa-lg faa-tada animated-hover fixed-plugin-button-nav cursor-pointer"></i>&nbsp;&nbsp;&nbsp;
+                        @Context.Session.GetString("Cantidad").ToString()&nbsp;&nbsp;&nbsp;
+                        <i class="fa fa-money fa-lg faa-tada animated-hover fixed-plugin-button-nav cursor-pointer"></i>&nbsp;&nbsp;&nbsp;
+                        @Context.Session.GetString("SubTotal").ToString()&nbsp;&nbsp;&nbsp;
 
                         <a href="@Url.Action("CambiarContrasennaUsuario", "Home")" class="nav-link p-0 text-body">
                             <i class="fa-solid fa-user-lock fa-beat-fade fa-xl" style="color: #dbd40a;" title="Cambiar Contraseña" aria-hidden="true"></i>
