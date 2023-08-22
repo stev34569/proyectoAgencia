@@ -8,7 +8,7 @@ using System.Net;
 
 namespace proyectoAgencia.Controllers
 {
-
+    [ResponseCache(NoStore = true, Duration = 0)]
     public class HomeController : Controller
     {
         private readonly IUsuariosModel _usuariosModel;
@@ -26,6 +26,7 @@ namespace proyectoAgencia.Controllers
             _configuration = configuration;
 
         }
+
 
 
         [HttpGet]
@@ -74,6 +75,21 @@ namespace proyectoAgencia.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult RegistrarUsuario(UsuarioEnt entidad)
+        {
+            entidad.Contrasenna = _usuariosModel.Encrypt(entidad.Contrasenna);
+            var datos = _usuariosModel.RegistrarUsuario(entidad);
+            if (datos?.Codigo != 1)
+            {
+                ViewBag.Mensaje = datos?.Mensaje;
+                return View("Registro");
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
 
 
         public bool ValidarCaptcha(string captchaResponse)
@@ -153,12 +169,14 @@ namespace proyectoAgencia.Controllers
 
 
         [HttpGet]
+        [FiltroSesion]
         public IActionResult Cambiar()
         {
             return View();
         }
 
         [HttpPost]
+        [FiltroSesion]
         public IActionResult CambiarContrasenna(UsuarioEnt entidad)
         {
             entidad.Contrasenna = _usuariosModel.Encrypt(entidad.Contrasenna);
@@ -181,7 +199,9 @@ namespace proyectoAgencia.Controllers
 
 
 
+
         [HttpGet]
+        [FiltroSesion]
         public IActionResult CambiarContrasennaUsuario()
         {
             HttpContext.Session.SetString("NombrePantalla", "Cambiar Contraseña");
@@ -189,6 +209,7 @@ namespace proyectoAgencia.Controllers
         }
 
         [HttpPost]
+        [FiltroSesion]
         public IActionResult CambiarContrasennaUsuario(UsuarioEnt entidad)
         {
             entidad.Contrasenna = _usuariosModel.Encrypt(entidad.Contrasenna);
@@ -212,23 +233,27 @@ namespace proyectoAgencia.Controllers
 
 
 
+
         [HttpGet]
+        [FiltroSesion]
         public IActionResult PantallaPrincipal()
         {
             HttpContext.Session.SetString("NombrePantalla", "Paquetes Disponibles");
-            var datos = _paquetesModel.ConsultarPaquetes();
+            var paquetes = _paquetesModel.ConsultarPaquetes(false);
 
             var datosCarrito = _carritoModel.ConsultarResumenCarrito();
 
             HttpContext.Session.SetString("Cantidad", datosCarrito?.Objeto.Cantidad.ToString());
             HttpContext.Session.SetString("SubTotal", datosCarrito?.Objeto.SubTotal.ToString());
+            HttpContext.Session.SetString("Total", datosCarrito?.Objeto.Total.ToString());
 
-            return View(datos?.Objetos);
+            return View(paquetes?.Objetos);
         }
 
 
 
         [HttpGet]
+        [FiltroSesion]
         public IActionResult CerrarSesion()
         {
             HttpContext.Session.Clear();

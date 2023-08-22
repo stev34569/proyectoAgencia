@@ -15,46 +15,56 @@
             </div>
         </div>
     </div>
+   
     <div class="row">
-
 
         @if (Model.Count() > 0)
         {
+            @if (ViewBag.Mensaje != null)
+            {
+                <div style="text-align:center" class="alert alert-light" role="alert">
+                    @ViewBag.Mensaje
+                </div>
+            }
 
             @foreach (var item in Model)
             {
                 <div class="col-lg-3">
                     <div class="card">
 
-                        <img src="@item.Imagen" class="card-img-top" alt="..." />
+                        <img src="@item.Imagen" class="card-img-top" width="400" height="200" alt="..." />
 
                         <div class="card-body">
                             <h5 class="card-title">@item.Nombre</h5>
                             <p class="card-text">
                                 Agente: @item.Agente
-                                <br /> Inicio: @item.FechaInicio.ToShortDateString() - @item.Finalizacion.ToShortDateString()
-                                <br /> Precio: 	₡ @item.Precio
+                                <br /> @item.FechaInicio.ToShortDateString() - @item.Finalizacion.ToShortDateString()
                                 <br /> Espacios: @item.Campo
-                                <br /> Descripcion: @item.Descripcion
+                                <br /> Precio: $ @item.Precio
                             </p>
-                        </div>
-                        <div class="row">
-                           
-                            <div class="col-5">
-                               <a href="@Url.Action("AgregarPaqueteCarrito", "Carrito", new { q = item.IdPaquete })" class="btn btn-outline-warning"><i class="fa fa-plus"></i>  Añadir</a>
+
+                            <div class="row">
+                                <div class="col-1"></div>
+                                <div class="col-5">
+                                    <a href="@Url.Action("AgregarPaqueteCarrito", "Carrito", new { q = item.IdPaquete })" class="btn btn-outline-info"><i class="fa fa-plus"></i>  Añadir</a>
+                                </div>
+                                <div class="col-5">
+
+                                    <button type="button" class="datos btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                            data-name="@item.Nombre" data-description="@item.Descripcion" data-video="@item.Video">
+                                        <i class="fa fa-list"></i>  Detalle
+                                    </button>
+
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <a href="" class="btn btn-primary"> <i class="fa-regular fa-circle-play"></i> Detalle</a>
-                              
-                            </div>
-                            <div class="col-5"></div>
+
                         </div>
 
                     </div>
-                    </div>
                     <br /><br />
-              
+                </div>
             }
+
         }
         else
         {
@@ -63,7 +73,7 @@
                 <div class="card">
 
                     <div class="card-body">
-                        <h5 class="card-title" style="text-align:center">No hay Paquetes de viajes disponibles en este momento</h5>
+                        <h5 class="card-title" style="text-align:center">No hay Paquetes disponibles en este momento</h5>
                     </div>
 
                 </div>
@@ -72,6 +82,42 @@
         }
 
     </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="staticBackdropLabel"><label style="font-size:16pt;" id="txtName"></label></h3>
+                </div>
+                <div class="modal-body">
+                    <textarea id="txtDesc" rows="10" style="width:100%;
+                resize:none; border:0px; text-align:justify; background-color:white;"
+                              disabled="disabled"></textarea>
+
+                    <br />
+
+                    <iframe src=""
+                            id="frameVideo"
+                            width="100%"
+                            height="350px"></iframe>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+
+        $(".datos").click(function () {
+            $("#txtName").text($(this).attr('data-name'));
+            $("#txtDesc").val($(this).attr('data-description'));
+            $("#frameVideo").attr("src", $(this).attr('data-video'));
+        });
+
+    </script>
 
 </section>
 <section class="probootstrap_section">

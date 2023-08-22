@@ -1,0 +1,90 @@
+﻿@model IEnumerable<proyectoAgencia.Entities.CarritoEnt>
+
+@{
+    ViewData["Title"] = "ConsultarDetalleCarrito";
+}
+
+<div class="row">
+
+    @if (Model.Count() > 0)
+    {
+        <div class="col-1"></div>
+        <div class="col-10">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr style="text-align:center">
+                        <th>Nombre</th>
+                        <th>Agente</th>
+                        <th>Precio</th>
+                        <th>Impuesto</th>
+                        <th>Total</th>
+                        <th>Remover</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Nombre</td>
+                            <td>@item.Agente</td>
+                            <td>@Math.Round(item.SubTotal,2)</td>
+                            <td>@Math.Round(item.Impuesto,2)</td>
+                            <td>@Math.Round(item.Total,2)</td>
+                            <td style="text-align:center">
+                                <a class="btn btn-danger" onclick="RemoverCarrito(@item.IdCarrito);">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+            <br>
+            @using (Html.BeginForm("ConfirmarPago", "Carrito", FormMethod.Post))
+            {
+                <input style="width:235px" type="submit" value="Confirmar Pago" class="btn btn-success">
+            }
+
+            <p style="font-weight:bold">El monto a cancelar es: @Math.Round(decimal.Parse(@Context.Session.GetString("Total").ToString()),2) IVI</p>
+
+        </div>
+    }
+    else
+    {
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <div class="card">
+
+                <div class="card-body">
+                    <h5 class="card-title" style="text-align:center">No hay paquetes agregados en este momento</h5>
+                </div>
+
+            </div>
+            <br /><br />
+        </div>
+    }
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script>
+
+    function RemoverCarrito(IdCarrito)
+    {
+        $.ajax({
+            type: "Post",
+            url: "/Carrito/RemoverPaqueteCarrito",
+            data: { "IdCarrito": IdCarrito },
+            dataType: "json",
+            success: function (response) {
+
+                window.location.href = "/Carrito/ConsultarDetalleCarrito";
+
+            }
+        });
+    }
+
+</script>

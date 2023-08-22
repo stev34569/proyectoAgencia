@@ -1,0 +1,84 @@
+﻿@model proyectoAgencia.Entities.PaqueteEnt
+
+@{
+    ViewData["Title"] = "Cambiar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("EditarPaquetes", "Paquete", FormMethod.Post, new { @class = "text-start", enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="card card-plain col-lg-8">
+
+            <div class="card-body">
+
+                @Html.HiddenFor(m => m.IdPaquete)
+
+                @Html.Label("Nombre")
+                <div class="input-group input-group-outline mb-3">
+                    @Html.TextBoxFor(x => x.Nombre, new { @class="form-control",
+                @placeholder="Nombre" })
+                </div>
+
+                @Html.Label("Descripción")
+                <div class="input-group input-group-outline mb-3">
+                    @Html.TextAreaFor(x => x.Descripcion, new { @class="form-control", @style="height:200px",
+                @placeholder="Descripción" })
+                </div>
+
+                @Html.Label("Agente")
+                <div class="input-group input-group-outline mb-3">
+                    @Html.TextBoxFor(x => x.Agente, new { @class="form-control", @placeholder="Instructor" })
+                </div>
+
+                @Html.Label("Precio")
+                <div class="input-group input-group-outline mb-3">
+                    @Html.TextBoxFor(x => x.Precio, new { @class="form-control", @placeholder="Precio", @type="number" })
+                </div>
+
+                @Html.Label("Inicio")
+                <div class="input-group input-group-outline mb-3">
+                    @Html.TextBoxFor(x => x.FechaInicio, "{0:yyyy-MM-dd HH:mm}", new { @class = "form-control", @type = "datetime-local" })
+                </div>
+
+                @Html.Label("Fin")
+                <div class="input-group input-group-outline mb-3">
+                    @Html.TextBoxFor(x => x.Finalizacion, "{0:yyyy-MM-dd HH:mm}", new { @class = "form-control", @type = "datetime-local" })
+                </div>
+
+                @Html.Label("Campo")
+                <div class="input-group input-group-outline mb-3">
+                    @Html.TextBoxFor(x => x.Campo, new { @class="form-control", @placeholder="Cupo", @type="number" })
+                </div>
+
+                @Html.Label("Imagen")
+                <div class="input-group input-group-outline mb-3">
+                    <input type="file" id="ImagenPaquete" name="ImagenPaquete" class="form-control" accept="image/png, image/jpg, image/jpeg">
+                </div>
+
+                @Html.Label("Imagen Actual")
+                <div class="input-group input-group-outline mb-3">
+                    @Html.TextBoxFor(x => x.Imagen, new { @class="form-control", @readonly="readonly", @style="background-color:#EBE6E6", @placeholder="Imagen Actual", @type="text" })
+                </div>
+
+                @Html.Label("Video")
+                <div class="input-group input-group-outline mb-3">
+                    @Html.TextBoxFor(x => x.Video, new { @class="form-control", @placeholder="Video" })
+                </div>
+
+                @if (ViewBag.Mensaje != null)
+                {
+                    <div style="text-align:center" class="alert alert-light" role="alert">
+                        @ViewBag.Mensaje
+                    </div>
+                }
+
+                <div style="text-align:right">
+                    <button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0" style="width:25%!important">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
