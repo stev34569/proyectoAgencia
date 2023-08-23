@@ -32,6 +32,26 @@ namespace proyectoAgencia.Models
             return response.Content.ReadFromJsonAsync<CarritoEntRespuesta>().Result;
         }
 
+        public CarritoEntRespuesta? RemoverPaqueteCarrito(long IdCarrito)
+        {
+            string token = _HttpContextAccessor.HttpContext.Session.GetString("TokenUsuario");
+            string url = "/api/Carrito/RemoverPaqueteCarrito?IdCarrito=" + IdCarrito;
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = _httpClient.DeleteAsync(_baseUrl + url).Result;
+            return response.Content.ReadFromJsonAsync<CarritoEntRespuesta>().Result;
+        }
+
+        public CarritoEntRespuesta? ConfirmarPago()
+        {
+            string token = _HttpContextAccessor.HttpContext.Session.GetString("TokenUsuario");
+            string url = "/api/Carrito/ConfirmarPago";
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = _httpClient.PostAsync(_baseUrl + url, null).Result;
+            return response.Content.ReadFromJsonAsync<CarritoEntRespuesta>().Result;
+        }
+
         public CarritoEntRespuesta? ConsultarResumenCarrito()
         {
             string token = _HttpContextAccessor.HttpContext.Session.GetString("TokenUsuario");
@@ -41,6 +61,14 @@ namespace proyectoAgencia.Models
             return response.Content.ReadFromJsonAsync<CarritoEntRespuesta>().Result;
         }
 
+        public CarritoEntRespuesta? ConsultarDetalleCarrito()
+        {
+            string token = _HttpContextAccessor.HttpContext.Session.GetString("TokenUsuario");
+            string url = "/api/Carrito/ConsultarDetalleCarrito";
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var response = _httpClient.GetAsync(_baseUrl + url).Result;
+            return response.Content.ReadFromJsonAsync<CarritoEntRespuesta>().Result;
+        }
 
     }
 }

@@ -3,16 +3,22 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using proyectoAgencia.Interfaces;
+using proyectoAgencia.Controllers;
 
 namespace proyectoAgecia.Controllers
 {
+
+    [FiltroSesion]
+    [ResponseCache(NoStore = true, Duration = 0)]
     public class UsuarioController : Controller
     {
         private readonly IUsuariosModel _usuariosModel;
+        private readonly IBitacoraModel _bitacoraModel;
 
-        public UsuarioController(IUsuariosModel usuariosModel)
+        public UsuarioController(IUsuariosModel usuariosModel, IBitacoraModel bitacoraModel)
         {
             _usuariosModel = usuariosModel;
+            _bitacoraModel = bitacoraModel;
         }
 
 
@@ -44,17 +50,49 @@ namespace proyectoAgecia.Controllers
         [HttpGet]
         public IActionResult Editar(long q)
         {
-            var datos = _usuariosModel.ConsultarUsuario(q);
-            var roles = _usuariosModel.ConsultarRoles();
-
-            var rolesDropDown = new List<SelectListItem>();
-            foreach (var item in roles.Objetos)
+            try
             {
-                rolesDropDown.Add(new SelectListItem { Value = item.IdRol.ToString(), Text = item.NombreRol });
+                var datos = _usuariosModel.ConsultarUsuario(q);
+                var roles = _usuariosModel.ConsultarRoles();
+
+                if (roles?.Codigo != 3)
+                {
+                    var rolesDropDown = new List<SelectListItem>();
+                    foreach (var item in roles.Objetos)
+                    {
+                        rolesDropDown.Add(new SelectListItem { Value = item.IdRol.ToString(), Text = item.NombreRol });
+                    }
+
+                    ViewBag.rolesDropDown = rolesDropDown;
+                    return View(datos?.Objeto);
+                }
+                else
+                {
+                    throw new Exception(roles?.Mensaje);
+                }
+            }
+            catch (Exception ex)
+            {
+                BitacoraEnt bitacora = new BitacoraEnt();
+                bitacora.Origen = ControllerContext.ActionDescriptor.ControllerName + " - " + ControllerContext.ActionDescriptor.ActionName;
+                bitacora.Mensaje = ex.Message;
+                bitacora.DireccionIP = HttpContext.Connection.RemoteIpAddress.ToString();
+                _bitacoraModel.RegistrarBitacora(bitacora);
+                return View("Error");
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Editar(UsuarioEnt entidad)
+        {
+            var datos = _usuariosModel.EditarUsuario(entidad);
+            if (datos?.Codigo != 1)
+            {
+                ViewBag.Mensaje = datos?.Mensaje;
+                return View("Editar");
             }
 
-            ViewBag.rolesDropDown = rolesDropDown;
-            return View(datos?.Objeto);
+            return RedirectToAction("ConsultarUsuarios", "Usuario");
         }
 
         [HttpPost]
@@ -73,4 +111,3 @@ namespace proyectoAgecia.Controllers
     }
 }
 
- 

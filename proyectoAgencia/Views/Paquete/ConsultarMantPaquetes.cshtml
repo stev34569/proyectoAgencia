@@ -1,0 +1,71 @@
+﻿@model IEnumerable<proyectoAgencia.Entities.PaqueteEnt>
+
+@{
+    ViewData["Title"] = "ConsultarPaquetes";
+}
+
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <a href="@Url.Action("AgregarPaquetes", "Paquete")" style="width:10%; margin-left:1%" class="btn btn-outline-danger"><i class="fa fa-plus"></i>  Agregar</a>
+    </div>
+</div>
+
+<div class="row">
+
+   
+    @if (Model.Count() > 0)
+    {
+        <div class="col-1"></div>
+        <div class="col-10">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr style="text-align:center">
+                        <th>Nombre</th>
+                        <th>Agente</th>
+                        <th>Precio</th>
+                        <th>Campo</th>
+                        <th>Fecha de Inicio</th>
+                        <th>Fecha de Finalización</th>
+                        <th>Editar</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td title="@item.Descripcion">@item.Nombre</td>
+                            <td>@item.Agente</td>
+                            <td>@item.Precio</td>
+                            <td>@item.Campo</td>
+                            <td>@item.FechaInicio</td>
+                            <td>@item.Finalizacion</td>
+                            <td style="text-align:center">
+                                <a href="@Url.Action("EditarPaquete","Paquete", new { q = item.IdPaquete })">
+                                    <i class="fa fa-pen"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4">
+            <div class="card">
+
+                <div class="card-body">
+                    <h5 class="card-title" style="text-align:center">No hay usuarios en este momento</h5>
+                </div>
+
+            </div>
+            <br /><br />
+        </div>
+    }
+
+</div>

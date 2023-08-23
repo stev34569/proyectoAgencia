@@ -11,6 +11,7 @@ namespace proyectoAgencia.Interfaces
         public UsuarioEntRespuesta? ConsultarUsuarios();
         public UsuarioEntRespuesta? ConsultarUsuario(long q);
         public UsuarioEntRespuesta? CambiarEstado(UsuarioEnt entidad);
+        public UsuarioEntRespuesta? EditarUsuario(UsuarioEnt entidad);
         public RolEntRespuesta? ConsultarRoles();
         public string Encrypt(string toEncrypt);
         public UsuarioEntRespuesta? EditarUsuario(UsuarioEnt entidad);

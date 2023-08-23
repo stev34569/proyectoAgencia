@@ -20,5 +20,7 @@
         public DateTime Finalizacion { get; set; }
         public int Campo { get; set; }
         public string Imagen { get; set; } = string.Empty;
+
+        public string Video { get; set; } = string.Empty;
     }
 }
