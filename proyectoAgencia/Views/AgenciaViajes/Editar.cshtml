@@ -13,19 +13,21 @@
 
             <div class="card-body">
 
+                @Html.HiddenFor(x => x.IdAgencia)
+
                 @Html.Label("NombreAgencia")
                 <div class="input-group input-group-outline mb-3">
-                    @Html.TextBoxFor(x => x.NombreAgencia, new { @class="form-control", @disabled="true", @type="text",
-                @placeholder="Identificación", @style="background-color:lightgray" })
+                    @Html.TextBoxFor(x => x.NombreAgencia, new { @class="form-control", @type="text",
+                @placeholder="NombreAgencia" })
                 </div>
 
                 @Html.Label("Direccion")
                 <div class="input-group input-group-outline mb-3">
-                    @Html.TextBoxFor(x => x.Direccion, new { @class="form-control", @disabled="true", @type="text",
-                @placeholder="Nombre", @style="background-color:lightgray" })
+                    @Html.TextBoxFor(x => x.Direccion, new { @class="form-control", @type="text",
+                @placeholder="Direccion" })
                 </div>
 
-                @Html.Label("Ciudad Electrónico")
+                @Html.Label("Ciudad")
                 <div class="input-group input-group-outline mb-3">
                     @Html.TextBoxFor(x => x.Ciudad, new { @class="form-control", @placeholder="Ciudad" })
                 </div>

@@ -54,5 +54,14 @@ namespace proyectoAgencia.Models
             return response.Content.ReadFromJsonAsync<AgenciaViajesEntRespuesta>().Result;
         }
 
+        public AgenciaViajesEntRespuesta? EditarAgencia(AgenciaViajesEnt entidad)
+        {
+           
+            string url = "/api/AgenciaViajes/EditarAgencia";
+            JsonContent jsonObject = JsonContent.Create(entidad);
+            var response = _httpClient.PutAsync(_baseUrl + url, jsonObject).Result;
+            return response.Content.ReadFromJsonAsync<AgenciaViajesEntRespuesta>().Result;
+        }
+
     }
 }

@@ -13,16 +13,18 @@
 
             <div class="card-body">
 
+                @Html.HiddenFor(x => x.IdUsuario)
+
                 @Html.Label("Identificación")
                 <div class="input-group input-group-outline mb-3">
                     @Html.TextBoxFor(x => x.Identificacion, new { @class="form-control", @disabled="true", @type="text",
-                    @placeholder="Identificación", @style="background-color:lightgray" })
+                @placeholder="Identificación", @style="background-color:lightgray" })
                 </div>
 
                 @Html.Label("Nombre")
                 <div class="input-group input-group-outline mb-3">
                     @Html.TextBoxFor(x => x.Nombre, new { @class="form-control", @disabled="true", @type="text",
-                    @placeholder="Nombre", @style="background-color:lightgray" })
+                @placeholder="Nombre", @style="background-color:lightgray" })
                 </div>
 
                 @Html.Label("Correo Electrónico")
@@ -34,7 +36,6 @@
                 <div class="input-group input-group-outline mb-3">
                     @Html.DropDownListFor(x => x.IdRol, ViewBag.rolesDropDown as List<SelectListItem>, new { @class="form-control" })
                 </div>
-                
 
                 @if (ViewBag.Mensaje != null)
                 {
@@ -50,3 +51,4 @@
         </div>
     </div>
 }
+

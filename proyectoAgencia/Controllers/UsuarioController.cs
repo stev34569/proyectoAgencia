@@ -57,6 +57,19 @@ namespace proyectoAgecia.Controllers
             return View(datos?.Objeto);
         }
 
+        [HttpPost]
+        public IActionResult Editar(UsuarioEnt entidad)
+        {
+            var datos = _usuariosModel.EditarUsuario(entidad);
+            if (datos?.Codigo != 1)
+            {
+                ViewBag.Mensaje = datos?.Mensaje;
+                return View("Editar");
+            }
+
+            return RedirectToAction("ConsultarUsuarios", "Usuario");
+        }
+
     }
 }
 

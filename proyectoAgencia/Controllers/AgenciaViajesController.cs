@@ -66,6 +66,20 @@ namespace proyectoAgencia.Controllers
             return View(datos?.Objeto);
         }
 
+        [HttpPost]
+        public IActionResult Editar(AgenciaViajesEnt entidad)
+        {
+            var datos = _agenciaViajesModel.EditarAgencia(entidad);
+            if (datos?.Codigo != 1)
+            {
+                ViewBag.Mensaje = datos?.Mensaje;
+                return View("Editar");
+            }
+
+            return RedirectToAction("ConsultarAgenciaViajes", "AgenciaViajes");
+        }
+
+
 
     }
 }

@@ -9,5 +9,7 @@ namespace proyectoAgencia.Interfaces
         public AgenciaViajesEntRespuesta? CambiarEstado(AgenciaViajesEnt entidad);
 
         public AgenciaViajesEntRespuesta? ConsultarAgenciaViaje(long q);
+
+        public AgenciaViajesEntRespuesta? EditarAgencia(AgenciaViajesEnt entidad);
     }
 }
