@@ -14,7 +14,7 @@ namespace proyectoAgencia.Interfaces
         public UsuarioEntRespuesta? EditarUsuario(UsuarioEnt entidad);
         public RolEntRespuesta? ConsultarRoles();
         public string Encrypt(string toEncrypt);
-        public UsuarioEntRespuesta? EditarUsuario(UsuarioEnt entidad);
+       
 
     }
 }

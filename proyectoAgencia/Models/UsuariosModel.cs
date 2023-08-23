@@ -129,16 +129,6 @@ namespace proyectoAgencia.Models
             tdes.Clear();
             return Convert.ToBase64String(resultArray, 0, resultArray.Length);
         }
-        public UsuarioEntRespuesta? EditarUsuario(UsuarioEnt entidad)
-        {
-            string token = _HttpContextAccessor.HttpContext.Session.GetString("TokenUsuario");
-            string url = "/api/Usuario/EditarUsuario";
-            JsonContent jsonObject = JsonContent.Create(entidad);
-
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var response = _httpClient.PutAsync(_baseUrl + url, jsonObject).Result;
-            return response.Content.ReadFromJsonAsync<UsuarioEntRespuesta>().Result;
-        }
 
     }
 }

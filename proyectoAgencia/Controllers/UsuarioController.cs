@@ -95,19 +95,6 @@ namespace proyectoAgecia.Controllers
             return RedirectToAction("ConsultarUsuarios", "Usuario");
         }
 
-        [HttpPost]
-        public IActionResult Editar(UsuarioEnt entidad)
-        {
-            var datos = _usuariosModel.EditarUsuario(entidad);
-            if (datos?.Codigo != 1)
-            {
-                ViewBag.Mensaje = datos?.Mensaje;
-                return View("Editar");
-            }
-
-            return RedirectToAction("ConsultarUsuarios", "Usuario");
-        }
-
     }
 }
 

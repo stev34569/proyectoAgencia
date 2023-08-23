@@ -42,7 +42,7 @@
                             <td>@item.FechaInicio</td>
                             <td>@item.Finalizacion</td>
                             <td style="text-align:center">
-                                <a href="@Url.Action("EditarPaquete","Paquete", new { q = item.IdPaquete })">
+                                <a href="@Url.Action("EditarPaquete","Paquete", new { IdPaquete = item.IdPaquete })">
                                     <i class="fa fa-pen"></i>
                                 </a>
                             </td>
@@ -60,7 +60,7 @@
             <div class="card">
 
                 <div class="card-body">
-                    <h5 class="card-title" style="text-align:center">No hay usuarios en este momento</h5>
+                    <h5 class="card-title" style="text-align:center">No hay paquetes en este momento</h5>
                 </div>
 
             </div>
