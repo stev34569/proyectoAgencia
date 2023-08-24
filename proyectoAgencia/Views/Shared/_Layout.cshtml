@@ -1,116 +1,193 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
-
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+    <title>
+        Argon Dashboard 2 by Creative Tim
+    </title>
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <!-- Nucleo Icons -->
+    <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
 
-    <title>Explorando el Mundo.</title>
-    <meta name="description" content="Free Bootstrap 4 Theme by ProBootstrap.com">
-    <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
 
 
-    <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700" rel="stylesheet">
-
-    <link href="~/css/fullcalendar.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/assets/css/bootstrap/bootstrap.css">
-    <link rel="stylesheet" href="~/assets/css/animate.css">
-    <link rel="stylesheet" href="~/assets/fonts/ionicons/css/ionicons.min.css">
-
-    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
-
-    <link rel="stylesheet" href="~/assets/fonts/flaticon/font/flaticon.css">
-
-    <link rel="stylesheet" href="~/assets/fonts/fontawesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="~/assets/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="~/assets/css/select2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-
-    <link rel="stylesheet" href="~/assets/css/helpers.css">
-    <link rel="stylesheet" href="~/assets/css/style.css">
-
 </head>
-<body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark probootstrap_navbar" id="probootstrap-navbar">
-        <div class="container">
+<body class="g-sidenav-show   bg-gray-100">
+    <div class="min-height-200 bg-dark position-absolute w-100"></div>
+    
+    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
+        <div class="sidenav-header">
+            <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+            <a class="navbar-brand m-0" ,target="_blank">
+                <img src="~/assets/images/logo.png" alt="" class="navbar-brand-img h-100" alt="main_logo">
+                <span class="ms-1 font-weight-bold">Agencia de Viajes</span>
+            </a>
+        </div>
+        <hr class="horizontal dark mt-0">
 
-            <h5 class="badge bg-primary text-wrap" style="width :100px 6rem">@Context.Session.GetString("NombreUsuario") / @Context.Session.GetString("NombreRolUsuario")</h5>
+          <!-- menu izquierda inicio -->
+        <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
+            <ul class="navbar-nav">
+               
+                <li class="nav-item">
+                    <a class="nav-link " href="@Url.Action("ConsultarUsuarios","Usuario")">
+                        <div class="icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <span class="nav-link-text ms-1"><i class="fa-regular fa-user"></i></span>
+                        </div>
+                        <span class="nav-link-text ms-1">Usuarios</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="@Url.Action("ConsultarMantPaquetes","Paquete")">
+                        <div class="icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <span class="nav-link-text ms-1"><i class="fa-solid fa-box-open"></i></span>
+                        </div>
+                        
+                        <span class="nav-link-text ms-1">Paquetes</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="@Url.Action("Registro","AgenciaViajes")">
+                        <div class="icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <span class="nav-link-text ms-1"><i class="fa-solid fa-location-dot"></i></span>
+                        </div>
+                        
+                        <span class="nav-link-text ms-1">Agencia de viajes</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="@Url.Action("ConsultarPaquetes2", "paquete2")">
+                        <div class="icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <span class="nav-link-text ms-1"> <i class="fa-solid fa-plane"></i></span>
+                        </div>
+                       
+                        <span class="nav-link-text ms-1">Destinos</span>
+                    </a>
+                </li>
+               
+                <li class="nav-item">
+                    <a class="nav-link " href="@Url.Action("ConsultarPaquetesUsuario", "paquete")">
+                        <div class="icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <span class="nav-link-text ms-1"><i class="fa-solid fa-calendar"></i></span>
+                        </div>
+                        
+                        <span class="nav-link-text ms-1">Calendario viaje</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="@Url.Action("ConsultarDetalleCarrito", "Carrito")">
+                        <div class="icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <span class="nav-link-text ms-1"><i class="fa-solid fa-cart-shopping"></i></span>
+                        </div>
+                        
+                        <span class="nav-link-text ms-1">Pagar Carrito</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " href="@Url.Action("ConsultarMantPaquetes", "Paquete")">
+                        <div class="icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <span class="nav-link-text ms-1"><i class="fa-solid fa-person-digging"></i></span>
+                        </div>
+                        
+                        <span class="nav-link-text ms-1">Manten. de paquetes</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- menu izquierda fin -->
 
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#probootstrap-menu" aria-controls="probootstrap-menu" aria-expanded="false" aria-label="Toggle navigation">
-                <span><i class="ion-navicon"></i></span>
-            </button>
-            <div class="collapse navbar-collapse" id="probootstrap-menu">
-                <ul class="navbar-nav ml-auto">
 
-                   @if (Context.Session.GetString("RolUsuario").ToString() == "1")
-                    {
-                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("ConsultarUsuarios","Usuario")">Usuarios</a></li>
-                        <li class="nav-item active"><a class="nav-link" href="@Url.Action("ConsultarMantCursos","Paquete")">Paquetes</a></li>
-                    }
-
-                    <li class="nav-item active"><a class="nav-link" href="@Url.Action("Registro","AgenciaViajes")">Agencia de viajes</a></li>
-                    <li class="nav-item active"><a class="nav-link" href="@Url.Action("ConsultarPaquetes2", "paquete2")">Destinos</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Contactenos</a></li>
-                    <li class="nav-item active"><a class="nav-link" href="@Url.Action("ConsultarPaquetesUsuario", "paquete")">Calendario de viajes</a></li>
+       
+    </aside>
+    <main class="main-content position-relative border-radius-lg ">
+        <!-- Navbar -->
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                        <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
+                        <li class="breadcrumb-item text-sm text-white active" aria-current="page">Dashboard</li>
+                    </ol>
+                    <h6 class="font-weight-bolder text-white mb-0">Dashboard</h6>
+                </nav>
+                <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                    
-                    <li class="nav-item active"><a class="nav-link" href="@Url.Action("ConsultarDetalleCarrito", "Carrito")">Pagarrer</a></li>
+                    <ul class="navbar-nav  justify-content-end">
+                        <li class="nav-item d-flex align-items-center">
+                            <i class="fa fa-cart-plus fa-lg faa-tada animated-hover fixed-plugin-button-nav cursor-pointer"></i>&nbsp;&nbsp;&nbsp;
+                            @Context.Session.GetString("Cantidad").ToString()&nbsp;&nbsp;&nbsp;
+                            <i class="fa fa-money fa-lg faa-tada animated-hover fixed-plugin-button-nav cursor-pointer"></i>&nbsp;&nbsp;&nbsp;
+                            @Context.Session.GetString("SubTotal").ToString() + IVA &nbsp;&nbsp;&nbsp;
 
-                    <li class="nav-item active"><a class="nav-link" href="@Url.Action("ConsultarMantPaquetes", "Paquete")">Mant Pqaauetes</a></li>
+                            <a href="@Url.Action("CambiarContrasennaUsuario", "Home")" class="nav-link p-0 text-body">
+                                <i class="fa-solid fa-user-lock fa-beat-fade fa-xl" style="color: #dbd40a;" title="Cambiar Contraseña" aria-hidden="true"></i>
+                            </a>
 
-                    <li class="nav-item px-3 d-flex align-items-center">
-
-                        <i class="fa fa-cart-plus fa-lg faa-tada animated-hover fixed-plugin-button-nav cursor-pointer"></i>&nbsp;&nbsp;&nbsp;
-                        @Context.Session.GetString("Cantidad").ToString()&nbsp;&nbsp;&nbsp;
-                        <i class="fa fa-money fa-lg faa-tada animated-hover fixed-plugin-button-nav cursor-pointer"></i>&nbsp;&nbsp;&nbsp;
-                        @Context.Session.GetString("SubTotal").ToString() + IVA &nbsp;&nbsp;&nbsp;
-
-                        <a href="@Url.Action("CambiarContrasennaUsuario", "Home")" class="nav-link p-0 text-body">
-                            <i class="fa-solid fa-user-lock fa-beat-fade fa-xl" style="color: #dbd40a;" title="Cambiar Contraseña" aria-hidden="true"></i>
-                        </a>
-                    </li>
-
-                    <li class="nav-item d-flex align-items-center">
-                        <a href="@Url.Action("CerrarSesion", "Home")" class="nav-link font-weight-bold px-0 text-body">
-                            <i class="fa-solid fa-right-from-bracket fa-beat-fade fa-xl" style="color: #d71709;" title="Cerrar Sesión" aria-hidden="true"></i>
-                        </a>
-                    </li>
-                </ul>
-
-            </div>
-        </div>
-    </nav>
-    <section class="probootstrap-cover overflow-hidden relative" style="background-image: url('/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5" id="section-home">
-        <div class="overlay"></div>
-        <div class="container">
-
-            <div class="row align-items-center">
-                <div class="col-md">
-                    <h2 class="heading mb-2 display-4 font-light probootstrap-animate">Explora el mundo con facilidad</h2>
-                    <p class="lead mb-5 probootstrap-animate">
-                    </p>
-                    <a href="onepage.html" role="button" class="btn btn-primary p-3 mr-3 pl-5 pr-5 text-uppercase d-lg-inline d-md-inline d-sm-block d-block mb-3">Ubicación</a>
-                    </p>
+                        <li class="nav-item d-flex align-items-center">
+                            <a href="@Url.Action("CerrarSesion", "Home")" class="nav-link font-weight-bold px-0 text-body">
+                                <i class="fa-solid fa-right-from-bracket fa-beat-fade fa-xl" style="color: #d71709;" title="Cerrar Sesión" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
+        </nav>
+        <!-- End Navbar -->
+         
 
-    </section>
-    @RenderBody()
 
-    <footer class="probootstrap_section probootstrap-border-top">
-        <div class="container">
+        <div class="container-fluid py-4">
+       
 
-            <div class="row pt-5">
-                <div class="col-md-12 text-center">
-                    <p class="probootstrap_font-14">&copy; 2023. Derechos Reservados. <br> Programacion Avanzada Web </p>
+            @RenderBody()
+           
 
+            <footer class="footer pt-3  ">
+                <div class="container-fluid">
+                    <div class="row align-items-center justify-content-lg-between">
+                        <div class="col-lg-6 mb-lg-0 mb-4">
+                            <div class="copyright text-center text-sm text-muted text-lg-start">
+                                © <script>
+                                      document.write(new Date().getFullYear())
+                                </script>,
+                                Programacion web <i class="fa fa-heart"></i> 
+                            </div>
+                        </div>
+                     
+                    </div>
                 </div>
-            </div>
+            </footer>
         </div>
-    </footer>
+    </main>
+   
+
+
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="../assets/js/plugins/chartjs.min.js"></script>
+
+
+
+
 
     <script src="~/assets/js/jquery.min.js"></script>
 
@@ -125,5 +202,22 @@
     <script src="~/assets/js/select2.min.js"></script>
     <script src="~/js/fullcalendar.min.js"></script>
     <script src="~/assets/js/main.js"></script>
+
+
+
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="../assets/js/argon-dashboard.min.js?v=2.0.4"></script>
 </body>
+
 </html>

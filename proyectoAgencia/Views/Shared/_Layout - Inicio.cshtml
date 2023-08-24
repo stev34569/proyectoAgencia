@@ -10,29 +10,31 @@
     <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
 
 
+    <link rel="apple-touch-icon" sizes="76x76" href="~/assets/img/apple-icon.png">
+      <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+      <title>
+        Argon Dashboard 2 by Creative Tim
+      </title>
+      <!--     Fonts and icons     -->
+      <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+      <!-- Nucleo Icons -->
+    <link href="~/assets/css/nucleo-icons.css" rel="stylesheet" />
+    <link href="~/assets/css/nucleo-svg.css" rel="stylesheet" />
+      <!-- Font Awesome Icons -->
+      <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  
+      <!-- CSS Files -->
+    <link id="pagestyle" href="~/assets/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400,700" rel="stylesheet">
 
-    <link rel="stylesheet" href="~/assets/css/bootstrap/bootstrap.css">
-    <link rel="stylesheet" href="~/assets/css/animate.css">
-    <link rel="stylesheet" href="~/assets/fonts/ionicons/css/ionicons.min.css">
-
-    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
-
-    <link rel="stylesheet" href="~/assets/fonts/flaticon/font/flaticon.css">
-
-    <link rel="stylesheet" href="~/assets/fonts/fontawesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="~/assets/css/bootstrap-datepicker.css">
-    <link rel="stylesheet" href="~/assets/css/select2.css">
-
-
-    <link rel="stylesheet" href="~/assets/css/helpers.css">
-    <link rel="stylesheet" href="~/assets/css/style.css">
+   
    
 
 </head>
 <body >
 
-    <div style="background-image: url('/assets/images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+    <div style="background-color:aliceblue  height: 100vh;" data-stellar-background-ratio="0.7">
 
         <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
@@ -42,25 +44,46 @@
     </nav>
 
 
-    <div class="col-12" style="margin:50px;">
+    <div class="col-12" style="margin-top:50px;">
     @RenderBody()
-    </div>
 
     </div>
 
-    <footer class="probootstrap_section probootstrap-border-top">
+          
+
+    </div>
+   
+    <footer class="probootstrap_section probootstrap-border-top" style="padding-top: 10px; padding-bottom: 10px; text-align: center;">
         <div class="container">
-            
-            <div class="row pt-5">
-                <div class="col-md-12 text-center">
-                    <p class="probootstrap_font-14">&copy; 2022. Derechos Reservados. <br> Programacion Avanzada </p>
-                   
+            <div class="row pt-3">
+                <div class="col-md-12" style="font-size: 12px; margin-top: 50px;">
+                    <p class="probootstrap_font-14" style="line-height: 1;">
+                        &copy; 2022. Derechos Reservados. <br> Programación Avanzada
+                    </p>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!--   Core JS Files   -->
+    <script src="~/assets/js/core/popper.min.js"></script>
+    <script src="~/assets/js/core/bootstrap.min.js"></script>
+    <script src="~/assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="~/assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script>
+        var win = navigator.platform.indexOf('Win') > -1;
+        if (win && document.querySelector('#sidenav-scrollbar')) {
+            var options = {
+                damping: '0.5'
+            }
+            Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+        }
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+    <script src="~/assets/js/argon-dashboard.min.js?v=2.0.4"></script>
 
-   
 </body>
+
 </html>

@@ -76,19 +76,7 @@ namespace proyectoAgencia.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult RegistrarUsuario(UsuarioEnt entidad)
-        {
-            entidad.Contrasenna = _usuariosModel.Encrypt(entidad.Contrasenna);
-            var datos = _usuariosModel.RegistrarUsuario(entidad);
-            if (datos?.Codigo != 1)
-            {
-                ViewBag.Mensaje = datos?.Mensaje;
-                return View("Registro");
-            }
-
-            return RedirectToAction("Index", "Home");
-        }
+      
 
 
 
