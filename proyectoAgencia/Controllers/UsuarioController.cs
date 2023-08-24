@@ -33,6 +33,7 @@ namespace proyectoAgecia.Controllers
         [HttpGet]
         public IActionResult CambiarEstado(long q)
         {
+
             UsuarioEnt entidad = new UsuarioEnt();
             entidad.IdUsuario = q;
 
