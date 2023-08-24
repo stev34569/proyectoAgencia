@@ -3,20 +3,19 @@
 @{
     ViewData["Title"] = "ConsultarUsuarios";
 }
-<section class="probootstrap_section bg-light">
-    <div class="container">
-        <div class="row text-center mb-5 probootstrap-animate">
-            <div class="col-md-12">
-                <h2 class="display-4 border-bottom probootstrap-section-heading">More Services</h2>
-            </div>
-        </div>
-    </div>
-    <div class="row">
+<style>
+    .custom-margin {
+        margin-top: 100px;
+    }
+</style>
+
+    
+    <div class="row custom-margin"">
 
         @if (Model.Count() > 0)
         {
-            <div class="col-1"></div>
-            <div class="col-10">
+           
+            <div class="col-md-12" style="margin-top :10px;">
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr class="table-primary">
@@ -46,12 +45,12 @@
                                     <td>Inactivar</td>
                                 }
                                 <td>@item.NombreRol</td>
-                                <td>
+                                <td class="text-center">
                                     <a href="@Url.Action("Editar","Usuario", new { q = item.IdUsuario })">
                                         <i class="fa-solid fa-pen-to-square" style="color: #0756df;"></i>
                                     </a>
                                 </td>
-                                <td>
+                                <td class="text-center">
                                     <a href="@Url.Action("CambiarEstado","Usuario", new { q = item.IdUsuario })">
                                         <i class="fa-solid fa-user-xmark" style="color: #ff0000;"></i>
                                     </a>
@@ -79,4 +78,4 @@
         }
 
     </div>
-</section>
+

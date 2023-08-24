@@ -1,8 +1,39 @@
 ﻿$(document).ready(function () {
 
     var eventsArray = [];
-    InicializarCalendario(eventsArray);
+
+    $.ajax({
+        type: "Get",
+        url: "/Paquete/ConsultarPaquetesUsuarioAjax",
+        dataType: "json",
+        success: function (events) {
+
+            events.forEach(function (element, index) {
+
+                eventsArray.push({
+                    title: element.nombre,
+                    start: element.fechaInicio,
+                    end: element.finalizacion,
+                    allDay: false,
+                    backgroundColor: 'gray',
+                    borderColor: '#00c0ef'
+                })
+
+
+
+            })
+
+
+
+            InicializarCalendario(eventsArray);
+        }
+    });
+
+
+
 });
+
+
 
 function InicializarCalendario(eventos) {
     $('#calendar').fullCalendar({

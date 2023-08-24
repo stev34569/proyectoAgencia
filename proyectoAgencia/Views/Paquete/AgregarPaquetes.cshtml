@@ -7,6 +7,16 @@
 
 <link href="~/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 
+<style>
+    .custom-margin {
+        margin-top: 100px;
+    }
+</style>
+
+<div class="row custom-margin">
+    
+</div>
+
 @using (Html.BeginForm("AgregarPaquetes", "Paquete", FormMethod.Post, new { @class = "text-start", enctype = "multipart/form-data" }))
 {
     <div class="row">
@@ -49,12 +59,12 @@
 
                 @Html.Label("Campo")
                 <div class="input-group input-group-outline mb-3">
-                    @Html.TextBoxFor(x => x.Campo, new { @class="form-control", @placeholder="Cupo", @type="number" })
+                    @Html.TextBoxFor(x => x.Campo, new { @class="form-control", @placeholder="Campo", @type="number" })
                 </div>
 
                 @Html.Label("Imagen")
                 <div class="input-group input-group-outline mb-3">
-                    <input type="file" id="Imagen" name="Imagen" class="form-control" accept="image/png, image/jpg, image/jpeg">
+                    <input type="file" id="ImagenPaquete" name="ImagenPaquete" class="form-control" accept="image/png, image/jpg, image/jpeg">
                 </div>
 
                 @Html.Label("Video")

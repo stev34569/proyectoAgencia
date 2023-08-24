@@ -5,6 +5,20 @@
     
 }
 
+<style>
+    .custom-margin {
+        margin-top: 100px;
+    }
+</style>
+
+<div class="row custom-margin">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <a href="@Url.Action("Registro", "AgenciaViajes")" style="width:10%; margin-left:1%" class="btn btn-outline-danger"><i class="fa fa-plus"></i>  Agregar</a>
+    </div>
+</div>
+
+
 <div class="row">
 
     @if (Model.Count() > 0)

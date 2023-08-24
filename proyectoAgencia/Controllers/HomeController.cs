@@ -76,7 +76,14 @@ namespace proyectoAgencia.Controllers
             return View();
         }
 
-      
+        [HttpGet]
+        public IActionResult Contacto()
+        {
+            return View();
+        }
+
+
+
 
 
 
