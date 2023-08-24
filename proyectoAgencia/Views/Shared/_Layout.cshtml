@@ -44,19 +44,19 @@
                 
                    @if (Context.Session.GetString("RolUsuario").ToString() == "1")
                     {
-            
-                    
-               
+
+
+                    <i class="fa-solid fa-house-user"></i>
                 <li class="nav-item">
                     <a class="nav-link " href="@Url.Action("ConsultarUsuarios","Usuario")">
                         <div class="icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <span class="nav-link-text ms-1"><i class="fa-regular fa-user"></i></span>
+                                <span class="nav-link-text ms-1"><i class="fa-solid fa-house-user"></i></span>
                         </div>
                         <span class="nav-link-text ms-1">Usuarios</span>
                     </a>
                 </li>
-              
 
+                   
                  
             
                 <li class="nav-item">
@@ -80,11 +80,20 @@
                 </li>
                 }
                 <li class="nav-item">
+                    <a class="nav-link " href="@Url.Action("PantallaPrincipal", "Home")">
+                        <div class="icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <span class="nav-link-text ms-1"><i class="fa-solid fa-house-user fa-xs"></i></span>
+                        </div>
+                        
+                        <span class="nav-link-text ms-1">Pantalla de Incio</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link " href="@Url.Action("ConsultarPaquetes2", "paquete2")">
                         <div class="icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <span class="nav-link-text ms-1"> <i class="fa-solid fa-plane"></i></span>
+                            <span class="nav-link-text ms-1"> <i class="fa-solid fa-plane-departure fa-2xs"></i></span>
                         </div>
-                       
+                        
                         <span class="nav-link-text ms-1">Destinos</span>
                     </a>
                 </li>
@@ -107,6 +116,7 @@
                         <span class="nav-link-text ms-1">Pagar Carrito</span>
                     </a>
                 </li>
+               
                 <li class="nav-item">
                     <a class="nav-link " href="@Url.Action("ConsultarMantPaquetes", "Paquete")">
                         <div class="icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -125,24 +135,36 @@
 
        
     </aside>
+
     <main class="main-content position-relative border-radius-lg ">
         <!-- Navbar -->
        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Dashboard</li>
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">Bienvenidos</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Servicios</li>
           </ol>
           <h5 class="badge bg-primary text-wrap" style="width :100px 6rem">@Context.Session.GetString("NombreUsuario") / @Context.Session.GetString("NombreRolUsuario")</h5>
+
         </nav>
+                
+                &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;
+                
+                <i class="fa-solid fa-cart-arrow-down fa-beat-fade fa-lg" style="color: #e5a906;"></i>&nbsp;&nbsp;&nbsp;
+                @Context.Session.GetString("Cantidad").ToString()&nbsp;&nbsp;&nbsp;
+                <i class="fa-solid fa-comments-dollar fa-beat-fade fa-lg" style="color: #0dd325;"></i>&nbsp;&nbsp;&nbsp;
+                @Context.Session.GetString("SubTotal").ToString() + 13% &nbsp;&nbsp;&nbsp;
+
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
          
           </div>
           <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-flex align-items-center">
               <a href="@Url.Action("CambiarContrasennaUsuario", "Home")" class="nav-link p-0 text-body">
-                <i class="fa-solid fa-user-lock fa-beat-fade fa-xl" style="color: #dbd40a;" title="Cambiar Contraseña" aria-hidden="true"></i>
+                            <i class="fa-solid fa-user-lock fa-beat-fade fa-xl" style="color: #e5a906" title="Cambiar Contraseña" aria-hidden="true"></i>
                
               </a>
             </li>

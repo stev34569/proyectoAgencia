@@ -3,75 +3,108 @@
 @{
     ViewData["Title"] = "ConsultarPaquetes";
 }
-<style>
-    .custom-margin {
-        margin-top: 100px;
-    }
-</style>
-
-<div class="row custom-margin">
-    <div class="col-1"></div>
-    <div class="col-10">
-        <a href="@Url.Action("AgregarPaquetes", "Paquete")" style="width:10%; margin-left:1%" class="btn btn-outline-danger"><i class="fa fa-plus"></i>  Agregar</a>
-    </div>
-</div>
 
 
-<div class="row">
 
-   
-    @if (Model.Count() > 0)
-    {
-        <div class="col-1"></div>
-        <div class="col-10">
-            <table class="table table-hover table-bordered">
-                <thead>
-                    <tr style="text-align:center">
-                        <th>Nombre</th>
-                        <th>Agente</th>
-                        <th>Precio</th>
-                        <th>Campo</th>
-                        <th>Fecha de Inicio</th>
-                        <th>Fecha de Finalización</th>
-                        <th>Editar</th>
-                    </tr>
-                </thead>
-                <tbody>
 
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td title="@item.Descripcion">@item.Nombre</td>
-                            <td>@item.Agente</td>
-                            <td>@item.Precio</td>
-                            <td>@item.Campo</td>
-                            <td>@item.FechaInicio</td>
-                            <td>@item.Finalizacion</td>
-                            <td style="text-align:center">
-                                <a href="@Url.Action("EditarPaquete","Paquete", new { IdPaquete = item.IdPaquete })">
-                                    <i class="fa fa-pen"></i>
-                                </a>
-                            </td>
-                        </tr>
-                    }
 
-                </tbody>
-            </table>
-        </div>
-    }
-    else
-    {
-        <div class="col-lg-4"></div>
-        <div class="col-lg-4">
-            <div class="card">
+            <div class="card-body px-0 pt-0 pb-2">
+                <div class="table-responsive p-0">
+                    <table class="table align-items-center justify-content-center mb-0">
+                        
+                        <thead>
 
-                <div class="card-body">
-                    <h5 class="card-title" style="text-align:center">No hay paquetes en este momento</h5>
+                            <tr>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Project</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Budget</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Completion</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Count() > 0)
+                            {
+                                <div class="col-1"></div>
+                                <div class="col-10">
+                                    <table class="table table-hover table-bordered">
+                                        <thead>
+                                            <tr style="text-align:center">
+                                                <th>Nombre</th>
+                                                <th>Agente</th>
+                                                <th>Precio</th>
+                                                <th>Campo</th>
+                                                <th>Fecha de Inicio</th>
+                                                <th>Fecha de Finalización</th>
+                                                <th>Editar</th>
+                                                <th>Agregar</th>
+                                              
+                                            </tr>
+
+                             
+
+                            <div class="d-flex justify-content-end mt-4">
+                                <div class="col-md-4">
+                                    <form method="get" action="@Url.Action("ConsultarUsuarios", "Usuario")">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control rounded-start" name="searchTerm" placeholder="Buscar usuarios">
+                                            <button class="btn btn-primary rounded-end" type="submit">Buscar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+
+
+
+
+                                        <tbody>
+
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td title="@item.Descripcion">@item.Nombre</td>
+                                                    <td>@item.Agente</td>
+                                                    <td>@item.Precio</td>
+                                                    <td>@item.Campo</td>
+                                                    <td>@item.FechaInicio</td>
+                                                    <td>@item.Finalizacion</td>
+                                                    <td style="text-align:center">
+                                                        <a href="@Url.Action("EditarPaquete","Paquete", new { IdPaquete = item.IdPaquete })">
+                                                            <i class="fa-solid fa-pen-to-square fa-lg" style="color: #0756df;"></i>
+                                                        </a>
+                                                    </td>
+                                                    
+                                                 <td style="text-align:center">
+                                                        <a href="@Url.Action("AgregarPaquetes", "Paquete", new { IdPaquete = item.IdPaquete })">
+                                                            <i class="fa-solid fa-circle-plus fa-lg" style="color: #3db51c;"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-lg-4"></div>
+                                <div class="col-lg-4">
+                                    <div class="card">
+
+                                        <div class="card-body">
+                                            <h5 class="card-title" style="text-align:center">No hay paquetes en este momento</h5>
+                                        </div>
+
+                                    </div>
+                                    <br /><br />
+                                </div>
+                            }
+                        </tbody>
+                    </table>
                 </div>
-
             </div>
-            <br /><br />
         </div>
-    }
-
+    </div>
 </div>
