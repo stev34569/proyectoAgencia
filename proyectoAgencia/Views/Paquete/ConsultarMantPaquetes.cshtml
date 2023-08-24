@@ -12,21 +12,13 @@
                 <div class="table-responsive p-0">
                     <table class="table align-items-center justify-content-center mb-0">
                         
-                        <thead>
-
-                            <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Project</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Budget</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Status</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">Completion</th>
-                                <th></th>
-                            </tr>
-                        </thead>
+                       
                         <tbody>
                             @if (Model.Count() > 0)
                             {
                                 <div class="col-1"></div>
                                 <div class="col-10">
+                                   <a href="@Url.Action("AgregarPaquetes", "Paquete")" style="width:10%; margin-left:1%" class="btn btn-outline-danger"><i class="fa fa-plus"></i>  Agregar</a>
                                     <table class="table table-hover table-bordered">
                                         <thead>
                                             <tr style="text-align:center">
@@ -37,7 +29,7 @@
                                                 <th>Fecha de Inicio</th>
                                                 <th>Fecha de Finalización</th>
                                                 <th>Editar</th>
-                                                <th>Agregar</th>
+                                               
                                               
                                             </tr>
 
@@ -75,11 +67,7 @@
                                                         </a>
                                                     </td>
                                                     
-                                                 <td style="text-align:center">
-                                                        <a href="@Url.Action("AgregarPaquetes", "Paquete", new { IdPaquete = item.IdPaquete })">
-                                                            <i class="fa-solid fa-circle-plus fa-lg" style="color: #3db51c;"></i>
-                                                        </a>
-                                                    </td>
+                                                 
                                                 </tr>
                                             }
 

@@ -14,6 +14,7 @@ builder.Services.AddScoped<IAgenciaViajesModel, AgenciaViajesModel>();
 builder.Services.AddScoped<IUsuariosModel, UsuariosModel>();
 builder.Services.AddScoped<ICarritoModel, CarritoModel>();
 builder.Services.AddScoped<IBitacoraModel, BitacoraModel>();
+builder.Services.AddScoped<IContactosModel, ContactosModel>();
 
 
 var app = builder.Build();

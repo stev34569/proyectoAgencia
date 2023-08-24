@@ -40,6 +40,14 @@ namespace proyectoAgencia.Controllers
         {
             try
             {
+                // Verificar si los campos de correo y contraseña están vacíos
+                if (string.IsNullOrWhiteSpace(entidad.CorreoElectronico) || string.IsNullOrWhiteSpace(entidad.Contrasenna))
+                {
+                    ViewBag.Mensaje = "Por favor, ingrese el correo electrónico y la contraseña.";
+                    return View("Index");
+                }
+
+
                 entidad.Contrasenna = _usuariosModel.Encrypt(entidad.Contrasenna);
                 var datos = _usuariosModel.IniciarSesion(entidad);
                 if (datos?.Codigo != 1)
@@ -115,6 +123,25 @@ namespace proyectoAgencia.Controllers
         [HttpPost]
         public IActionResult RegistrarUsuario(UsuarioEnt entidad, string recaptchaValue)
         {
+            // Verificar si los campos de id,correo y contraseña
+            if (string.IsNullOrWhiteSpace(entidad.Identificacion))
+            {
+                ViewBag.Mensaje = "Por favor, ingrese la identificacion.";
+                return View("Registro");
+            }
+
+            if (string.IsNullOrWhiteSpace(entidad.CorreoElectronico))
+            {
+                ViewBag.Mensaje = "Por favor, ingrese el correo electronico.";
+                return View("Registro");
+            }
+
+            if (string.IsNullOrWhiteSpace(entidad.Contrasenna))
+            {
+                ViewBag.Mensaje = "Por favor, ingrese la contraseña.";
+                return View("Registro");
+            }
+
             // Verificar el reCAPTCHA
             if (string.IsNullOrEmpty(recaptchaValue))
             {

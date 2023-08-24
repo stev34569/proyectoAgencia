@@ -1,0 +1,77 @@
+﻿@model IEnumerable<proyectoAgencia.Entities.ContactosEnt>
+
+@{
+    ViewData["Title"] = "ConsultarContactos";
+}
+<style>
+    .custom-margin {
+        margin-top: 100px;
+    }
+</style>
+
+
+<div class="row custom-margin" ">
+
+    @if (Model.Count() > 0)
+    {
+
+    <div class="col-md-12" style="margin-top :10px;">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr class="table-primary">
+                    <th>Usuario </th>
+                    <th>Correo Electrónico</th>
+                    <th>Mensaje</th>
+                    <th>Estado</th>
+                   
+                    <th>Cambiar Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>@item.IdUsuario</td>
+                    <td>@item.CorreoElectronico</td>
+                    <td>@item.Mensaje</td>
+                    @if (item.Estado == true)
+                    {
+                    <td>No leido</td>
+                    }
+                    else
+                    {
+                    <td>Leido</td>
+                    }
+                  
+                    
+                
+                    <td class="text-center">
+                        <a href="@Url.Action("CambiarEstado","Contactos", new { q = item.IdContacto })">
+                            <i class="fa fa-exchange"></i>
+                        </a>
+                    </td>
+                </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    }
+    else
+    {
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4">
+        <div class="card">
+
+            <div class="card-body">
+                <h5 class="card-title" style="text-align:center">No hay contactos en este momento en este momento</h5>
+            </div>
+
+        </div>
+        <br /><br />
+    </div>
+    }
+
+</div>
+

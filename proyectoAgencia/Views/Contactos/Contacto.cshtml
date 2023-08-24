@@ -1,0 +1,77 @@
+﻿@model proyectoAgencia.Entities.ContactosEnt
+@{
+    ViewData["Title"] = "Registro";
+
+
+}
+<div class="my-5"></div>
+
+<!-- Contact -->
+<section class="container text-center" ">
+
+   
+    <!--Contact description-->
+    <p class="pb-4">¡Si tienes algun problema o simplemente quieres contactarte con nosotros llena el siguiente formulario!</p>
+
+    <div class="row justify-content-center">
+
+        <!--Grid column-->
+        <div class="col-lg-8 mb-5">
+
+            <!--Form with header-->
+            <div class="card border-primary rounded-0">
+
+                <div class="card-header p-0">
+                    <div class="bg-primary text-white text-center py-2">
+
+                        <p class="m-0">Escribe el mensaje que nos deseas enviar, te responderemos lo mas antes posible</p>
+                    </div>
+                </div>
+                <div class="card-body p-3">
+
+                    @using (Html.BeginForm("RegistrarContacto", "Contactos", FormMethod.Post, new { @class = "text-start" }))
+                    {
+
+
+                    <div class="input-group input-group-outline mb-3">
+                        @Html.TextAreaFor(x => x.Mensaje, new { @class="form-control", @type="text", @placeholder="Mensaje"})
+                    </div>
+
+
+                    @if (ViewBag.Mensaje != null)
+                    {
+                    <div style="text-align:center" class="alert alert-light" role="alert">
+                        @ViewBag.Mensaje
+                    </div>
+                    }
+
+                    <div class="text-center">
+                        <button class="btn btn-primary btn-block rounded-0 py-2">Enviar</button>
+                    </div>
+
+                    }
+                    </>
+                </div>
+
+
+            </div>
+
+        </div>
+        <!--Form with header-->
+
+    </div>
+    <!--Grid column-->
+    <!--Grid column-->
+    <div class="col-lg-7">
+
+        <!--Google map-->
+        <div class="mb-4">
+        </div>
+
+
+    </div>
+    <!--Grid column-->
+    </div>
+
+</section>
+<!-- Contact -->
