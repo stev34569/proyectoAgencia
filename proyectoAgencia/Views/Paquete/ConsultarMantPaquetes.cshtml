@@ -10,7 +10,15 @@
 
             <div class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
+                    <div class="row custom-margin">
+    <div class="col-1"></div>
+    <div class="col-10">
+         <a href="@Url.Action("AgregarPaquetes", "Paquete")" style="width:10%; margin-left:1%" class="btn btn-outline-danger"><i class="fa fa-plus"></i>  Agregar</a>
+    </div>
+</div>
                     <table class="table align-items-center justify-content-center mb-0">
+
+                       
                         
                        
                         <tbody>
@@ -18,8 +26,8 @@
                             {
                                 <div class="col-1"></div>
                                 <div class="col-10">
-                                   <a href="@Url.Action("AgregarPaquetes", "Paquete")" style="width:10%; margin-left:1%" class="btn btn-outline-danger"><i class="fa fa-plus"></i>  Agregar</a>
-                                    <table class="table table-hover table-bordered">
+                            
+                                    <table class="table table-hover table-bordered"  id="mantU">
                                         <thead>
                                             <tr style="text-align:center">
                                                 <th>Nombre</th>
@@ -32,23 +40,6 @@
                                                
                                               
                                             </tr>
-
-                             
-
-                            <div class="d-flex justify-content-end mt-4">
-                                <div class="col-md-4">
-                                    <form method="get" action="@Url.Action("ConsultarUsuarios", "Usuario")">
-                                        <div class="input-group">
-                                            <input type="text" class="form-control rounded-start" name="searchTerm" placeholder="Buscar usuarios">
-                                            <button class="btn btn-primary rounded-end" type="submit">Buscar</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-
-
-
-
 
                                         <tbody>
 
@@ -96,3 +87,46 @@
         </div>
     </div>
 </div>
+
+                                     <script>
+
+    $(document).ready(function () {
+        $('#mantU').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.2/i18n/es-ES.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                '', '', ''
+
+
+                , {
+                    extend: 'pdfHtml5', className: "btn btn-outline-secondary btn-sm",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4]
+                    }
+                }
+
+                , {
+                    extend: 'excelHtml5', className: "btn btn-outline-secondary btn-sm",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4]
+                    }
+                }
+                , {
+                    extend: 'csvHtml5', className: "btn btn-outline-secondary btn-sm",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4]
+                    }
+                }
+                , {
+                    extend: 'print', className: "btn btn-outline-secondary btn-sm",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4]
+                    }
+                }
+            ],
+        });
+    });
+
+</script>

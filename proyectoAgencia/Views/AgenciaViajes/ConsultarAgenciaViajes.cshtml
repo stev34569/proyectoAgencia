@@ -11,6 +11,7 @@
     }
 </style>
 
+
 <div class="row custom-margin">
     <div class="col-1"></div>
     <div class="col-10">
@@ -25,7 +26,7 @@
     {
             <div class="col-1"></div>
             <div class="col-10">
-                <table class="table table-hover table-bordered">
+                <table class="table table-hover table-bordered" id="agencia">
                     <thead>
                         <tr>
                             <th>ID agencia</th>
@@ -33,6 +34,9 @@
                             <th>Direccion</th>
                             <th>Estado</th>
                             <th>Ciudad</th>
+                            <th>Editar</th>
+                            <th>Cambiar estado</th>
+
 
                         </tr>
                     </thead>
@@ -55,12 +59,12 @@
                                     <td>@item.Ciudad</td>
                                     <td>
                                         <a href="@Url.Action("Editar","AgenciaViajes", new { q = item.IdAgencia })">
-                                            <i class="fa fa-pencil"></i>
+                                            <i class="fa-solid fa-pen-to-square" style="color: #0756df;"></i>
                                         </a>
                                     </td>
                                     <td>
                                         <a href="@Url.Action("CambiarEstado","AgenciaViajes", new { q = item.IdAgencia })">
-                                            <i class="fa fa-exchange"></i>
+                                            <i class="fa-solid fa-user-xmark" style="color: #ff0000;"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -86,3 +90,47 @@
     }
 
 </div>
+
+
+                    <script>
+
+    $(document).ready(function () {
+        $('#agencia').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.13.2/i18n/es-ES.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                '', '', ''
+
+
+                , {
+                    extend: 'pdfHtml5', className: "btn btn-outline-secondary btn-sm",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4]
+                    }
+                }
+
+                , {
+                    extend: 'excelHtml5', className: "btn btn-outline-secondary btn-sm",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4]
+                    }
+                }
+                , {
+                    extend: 'csvHtml5', className: "btn btn-outline-secondary btn-sm",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4]
+                    }
+                }
+                , {
+                    extend: 'print', className: "btn btn-outline-secondary btn-sm",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4]
+                    }
+                }
+            ],
+        });
+    });
+
+</script>
